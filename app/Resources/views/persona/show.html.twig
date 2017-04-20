@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Persona</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ persona.id }}</td>
+            </tr>
+            <tr>
+                <th>Primerapellido</th>
+                <td>{{ persona.primerApellido }}</td>
+            </tr>
+            <tr>
+                <th>Segundoapellido</th>
+                <td>{{ persona.segundoApellido }}</td>
+            </tr>
+            <tr>
+                <th>Primernombre</th>
+                <td>{{ persona.primerNombre }}</td>
+            </tr>
+            <tr>
+                <th>Segundonombre</th>
+                <td>{{ persona.segundoNombre }}</td>
+            </tr>
+            <tr>
+                <th>Cedula</th>
+                <td>{{ persona.cedula }}</td>
+            </tr>
+            <tr>
+                <th>Fechanacimiento</th>
+                <td>{% if persona.fechaNacimiento %}{{ persona.fechaNacimiento|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Direccion</th>
+                <td>{{ persona.direccion }}</td>
+            </tr>
+            <tr>
+                <th>Genero</th>
+                <td>{{ persona.genero }}</td>
+            </tr>
+            <tr>
+                <th>Telefono1</th>
+                <td>{{ persona.telefono1 }}</td>
+            </tr>
+            <tr>
+                <th>Telefono2</th>
+                <td>{{ persona.telefono2 }}</td>
+            </tr>
+            <tr>
+                <th>Cedularuta</th>
+                <td>{{ persona.cedulaRuta }}</td>
+            </tr>
+            <tr>
+                <th>Carnetruta</th>
+                <td>{{ persona.carnetRuta }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('persona_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('persona_edit', { 'id': persona.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

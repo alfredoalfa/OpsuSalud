@@ -1,0 +1,24 @@
+{% extends 'menu.html.twig' %}
+
+{% block content -%}
+<div class="col-md-12">
+
+    <h4 style="color:#3371B5">Personas nuevo</h4>
+
+<div class="table-responsive">
+<table class="table">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('persona_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    </table>
+</dir>
+{% endblock %}
+

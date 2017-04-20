@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="RegistroSolicitud" table="registro_solicitud">
+    <indexes>
+      <index name="IDX_3C2E4C851242AED" columns="idestatus"/>
+      <index name="IDX_3C2E4C86C1EE153" columns="idpaciente"/>
+      <index name="IDX_3C2E4C869E0B680" columns="idpatologia"/>
+      <index name="IDX_3C2E4C8E8C9D535" columns="idsolicitud"/>
+      <index name="IDX_3C2E4C8174D74B2" columns="idtiposolicitud"/>
+      <index name="IDX_3C2E4C8A62749A9" columns="idtitular"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+    </id>
+    <field name="centroMedico" type="string" column="centro_medico" length="255" nullable="true"/>
+    <field name="tratamiento" type="text" column="tratamiento" nullable="true"/>
+    <field name="montoSolicitado" type="decimal" column="monto_solicitado" precision="10" scale="0" nullable="true"/>
+    <field name="observacion" type="text" column="observacion" nullable="true"/>
+    <field name="informeMedicoRuta" type="text" column="informe_medico_ruta" nullable="true"/>
+    <field name="presupuestoRuta" type="string" column="presupuesto_ruta" length="255" nullable="false"/>
+    <field name="fechaAprobado" type="date" column="fecha_aprobado" nullable="true"/>
+    <field name="completado" type="boolean" column="completado" nullable="true"/>
+    <many-to-one field="idestatus" target-entity="Estatus">
+      <join-columns>
+        <join-column name="idestatus" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idpaciente" target-entity="Persona">
+      <join-columns>
+        <join-column name="idpaciente" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idpatologia" target-entity="Patologia">
+      <join-columns>
+        <join-column name="idpatologia" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idsolicitud" target-entity="Solicitud">
+      <join-columns>
+        <join-column name="idsolicitud" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idtiposolicitud" target-entity="Tiposolicitud">
+      <join-columns>
+        <join-column name="idtiposolicitud" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idtitular" target-entity="Titular">
+      <join-columns>
+        <join-column name="idtitular" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

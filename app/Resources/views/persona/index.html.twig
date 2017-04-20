@@ -1,0 +1,58 @@
+{% extends 'menu.html.twig' %}
+
+ {% block styleshets -%}
+ {{ parent() }}
+ {% endblock %}
+
+{% block content -%}
+<div class="col-md-12">
+
+ <h4 style="color:#7B9C0A">Personaa</h4>
+ <div class="table-responsive">
+  <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Primerapellido</th>
+                <th>Segundoapellido</th>
+                <th>Primernombre</th>
+                <th>Segundonombre</th>
+                <th>Cedula</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for persona in personas %}
+            <tr>
+                <td><a href="{{ path('persona_show', { 'id': persona.id }) }}">{{ persona.id }}</a></td>
+                <td>{{ persona.primerApellido }}</td>
+                <td>{{ persona.segundoApellido }}</td>
+                <td>{{ persona.primerNombre }}</td>
+                <td>{{ persona.segundoNombre }}</td>
+                <td>{{ persona.cedula }}</td>
+                <td>{% if persona.fechaNacimiento %}{{ persona.fechaNacimiento|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                           <div class="btn-group">
+            <button type="button" class="btn btn-primary">Opciones</button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-        expanded="false">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li><a href="{{ path('persona_show', { 'id': persona.id }) }}">Mostar Detalles</a></li>
+                <li><a href="{{ path('persona_edit', { 'id': persona.id }) }}">Editar o Agregar programas</a></li>
+            </ul>
+        </div>  
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+         <a href="{{ path('persona_new') }}" class="btn btn-primary dropdown-toggle">
+                 Nueva Aldea
+            </a>
+    </ul>
+    </div>
+    {% endblock %}

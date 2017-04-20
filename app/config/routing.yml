@@ -1,0 +1,8 @@
+opsu_hcm:
+    resource: "@OpsuHcmBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+app:
+    resource: "@AppBundle/Resources/config/routing.yml"
+    prefix: /

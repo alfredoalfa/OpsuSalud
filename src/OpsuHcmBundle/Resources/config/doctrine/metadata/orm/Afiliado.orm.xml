@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Afiliado" table="afiliado">
+    <indexes>
+      <index name="IDX_319B09B953B72D2C" columns="idparentesco"/>
+      <index name="IDX_319B09B98EE1E4F5" columns="idpersona"/>
+      <index name="IDX_319B09B9A62749A9" columns="idtitular"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+    </id>
+    <many-to-one field="idparentesco" target-entity="Parentesco">
+      <join-columns>
+        <join-column name="idparentesco" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idpersona" target-entity="Persona">
+      <join-columns>
+        <join-column name="idpersona" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idtitular" target-entity="Titular">
+      <join-columns>
+        <join-column name="idtitular" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

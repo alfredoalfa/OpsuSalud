@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}HCM{% endblock %}</title> 
+
+{% block stylesheets %}
+  <link href ="{{ asset('bundles/opsusalud/bootstrap/css/bootstrap.min.css') }}" type="text/css" rel="stylesheet">
+    <link href ="{{ asset('bundles/bootstrap/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet">
+    <link href ="{{ asset('bundles/opsusalud/bootstrap/css/body.css') }}" type="text/css" rel="stylesheet">
+    <link href ="{{ asset('bundles/opsusalud/bootstrap/css/nav.css') }}" type="text/css" rel="stylesheet">
+    <link href ="{{ asset('bundles/opsusalud/date-piker-bootstrap/css/bootstrap-datetimepicker.min.css') }}" type="text/css" rel="stylesheet">     
+{% endblock %}
+
+<link rel="icon" type="image/x-icon" href="{{ asset('faviconnn.ico') }}" /> 
+ </head>
+<body>
+    {% block cintillo %}
+        
+    <div class="container">
+            <div id="container" class="col-md-12">
+            <div class="banner">
+                <IMG SRC="{{ asset('bundles/opsusalud/imagenes/cintillo.png') }}" WIDTH=100% HEIGHT=50 ALT="cintillo">
+                <IMG SRC="{{ asset('bundles/opsusalud/imagenes/banner.png') }}" WIDTH=100% HEIGHT=100% ALT="banner">
+     
+            </div>
+    {% block menu %}{% endblock %}
+       
+            </div>
+        </div> 
+{% endblock %}
+<body> 
+
+{% block body %}
+
+<section>
+    <div class="container">
+         <div id="container" class="col-md-12">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    
+                    {% block content %}{% endblock %}
+
+                </div>
+            </div>
+        </div>
+                     </div>
+</section>                    
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+           <!-- Site footer -->
+           <div class="container">
+        <div id="footer" align="center">               
+            <p class="text_encima">Calle Este A2, entre esquina Dr. Paúl y Salvador de León, Torre MPPEUCT-CNU, Parroquia Catedral, Municipio Libertador.<br>
+            Caracas - Venezuela. Teléfonos: (+58-212) 506-0506. RIF: G-200000929</p>
+        </div>
+    </div>
+           <!-- Site footer -->
+{% endblock %}
+
+{% block javascripts %}
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/bootstrap/js/bootstrap.min.js') }}"></script>
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/bootstrap/js/jquery-1.11.1.min.js') }}"></script>
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/bootstrap/js/modal.js') }}"></script>
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/bootstrap/js/dropdown.js') }}"></script>
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
+{% endblock %}
+    </body>
+</html> 

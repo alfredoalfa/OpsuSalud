@@ -1,0 +1,49 @@
+# you can read more about security in the related section of the documentation
+# http://symfony.com/doc/current/book/security.html
+security:
+    access_denied_url:  /login
+    # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
+    encoders:
+        FOS\UserBundle\Model\UserInterface: sha512
+
+    # http://symfony.com/doc/current/book/security.html#hierarchical-roles
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER # los usuarios con rol ROLE_ADMIN también tengan el rol ROLE_USER.
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH] #asignar el rol ROLE_SUPER_ADMIN 
+        #implica que se han asignado también los roles ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH y ROLE_USER.
+
+    # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+
+    firewalls:
+        main:
+            pattern:    ^/
+            form_login:
+                check_path: /login_check
+                login_path: /login
+                provider: fos_userbundle
+                always_use_default_target_path: true
+                default_target_path: /
+                remember_me: true
+            logout:
+                path:   /logout
+                target: /login
+            anonymous: ~
+            #http_basic:
+            #    realm: "Secured Demo Area"
+
+    # with these settings you can restrict or allow access for different parts
+    # of your application based on roles, ip, host or methods
+    # http://symfony.com/doc/current/book/security.html#security-book-access-control-matching-options
+    #  require ROLE_ADMIN for /admin*
+    access_control:
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(css|js), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(_wdt|_profiler), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        #- { path: ^/integracionmod/secured, roles: IS_AUTHENTICATED_ANONYMOUSLY }

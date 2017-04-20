@@ -1,0 +1,25 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="fos_user_user_show">
+      
+    <div class="col-md-8 col-md-offset-2">
+ 	<h4 style="color:#7B9C0A">Datos del Usuario</h4>
+   
+
+   <div class="table-responsive">
+    <table class="table table-hover">
+<tr class="info">
+	<th>{{ 'profile.show.username'|trans }} </th>
+	<th>{{ 'profile.show.email'|trans }} </th>
+	<th>Accion </th>
+</tr>
+<tr>
+	<th>{{ user.username }}</th>
+	<th> {{ user.email }}</th>
+	<th><a class="btn btn-primary" href="{{ path('index') }} ">Atras</a></th>
+</tr>
+	</table>
+	 
+</div>
+</div>
+</div>
