@@ -5,7 +5,8 @@ namespace OpsuHcmBundle\Controller;
 use OpsuHcmBundle\Entity\Persona;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Persona controller.
@@ -133,4 +134,31 @@ class PersonaController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * Creates a new persona entity.
+     *
+     * @Route("/crearpersona/", name="crearPersona")
+     * @Method({"GET", "POST"})
+     */
+    public function crearPersonaAction(Request $request)
+    {
+        $persona = new Persona();
+        $form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($persona);
+            $em->flush();
+
+            return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));
+        }
+       
+        return $this->render('persona/new.html.twig', array(
+            'persona' => $persona,
+            'form' => $form->createView(),
+        ));
+    }
+
 }

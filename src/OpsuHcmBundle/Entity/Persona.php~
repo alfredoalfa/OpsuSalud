@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Persona
  *
  * @ORM\Table(name="persona", indexes={@ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Persona")
  */
 class Persona
 {
@@ -107,9 +107,12 @@ class Persona
     private $carnetRuta;
 
     /**
-     * @var integer
+     * @var \FosUser
      *
-     * @ORM\Column(name="idusuario", type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idusuario", referencedColumnName="id")
+     * })
      */
     private $idusuario;
 
@@ -427,17 +430,17 @@ class Persona
      * @param integer $idusuario
      * @return Persona
      */
-    public function setIdusuario($idusuario)
+    public function setIdUsuario(\AppBundle\Entity\User $idUsuario = null)
     {
         $this->idusuario = $idusuario;
 
         return $this;
     }
 
-    /**
+/**
      * Get idusuario
      *
-     * @return integer 
+     * @return \OpsuHcmBundle\Entity\User
      */
     public function getIdusuario()
     {
@@ -487,6 +490,10 @@ class Persona
      */
     public function getIdparroquia()
     {
+        return $this->idparroquia;
+    }
+    
+    public function __toString(){
         return $this->idparroquia;
     }
 }

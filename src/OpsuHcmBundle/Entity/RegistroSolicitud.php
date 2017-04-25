@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * RegistroSolicitud
  *
  * @ORM\Table(name="registro_solicitud", indexes={@ORM\Index(name="IDX_3C2E4C851242AED", columns={"idestatus"}), @ORM\Index(name="IDX_3C2E4C86C1EE153", columns={"idpaciente"}), @ORM\Index(name="IDX_3C2E4C869E0B680", columns={"idpatologia"}), @ORM\Index(name="IDX_3C2E4C8E8C9D535", columns={"idsolicitud"}), @ORM\Index(name="IDX_3C2E4C8174D74B2", columns={"idtiposolicitud"}), @ORM\Index(name="IDX_3C2E4C8A62749A9", columns={"idtitular"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\RegistroSolicitud")
  */
 class RegistroSolicitud
 {

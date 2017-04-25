@@ -8,6 +8,7 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
+        ROLE_TEMPORAL:    ROLE_TEMPORAL # los usuarios registrados son ROLE_TEMPORAL hasta que completen el registro
         ROLE_ADMIN:       ROLE_USER # los usuarios con rol ROLE_ADMIN también tengan el rol ROLE_USER.
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH] #asignar el rol ROLE_SUPER_ADMIN 
         #implica que se han asignado también los roles ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH y ROLE_USER.

@@ -21,4 +21,17 @@
     </table>
 </dir>
 {% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/js/estados.js') }}"></script>
+ <script type="text/javascript">
+            $(function () {
+                //alert('piker');
+                $('#opsuhcmbundle_persona_fechaNacimiento').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY-MM-DD'
+            });
+        });
+        </script>
+{% endblock %}
 

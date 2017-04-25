@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Solicitud
  *
  * @ORM\Table(name="solicitud", indexes={@ORM\Index(name="IDX_96D27CC0A62749A9", columns={"idtitular"})})
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Solicitud")
  */
 class Solicitud
 {
