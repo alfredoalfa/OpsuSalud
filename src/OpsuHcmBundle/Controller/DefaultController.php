@@ -21,18 +21,19 @@ class DefaultController extends Controller
    public function indexAction(Request $request)
     {
         $user = $this->getUser();
-        $roles = $user->getRoles();
 
-        switch ($roles[0]) {
-            case "ROLE_TEMPORAL":
-                return $this->redirectToRoute('crearPersona');
-                break;
-            default:
-               return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
-                    'user' => $this->getUser()));
-                break;
-        }
-        
+        return $this->render('OpsuHcmBundle:Default:index.html.twig');
+
+        // $roles = $user->getRoles();
+
+        // switch ($roles[0]) {
+        //     case "ROLE_TEMPORAL":
+        //         return $this->redirectToRoute('crearPersona');
+        //         break;
+        //     default:
+        //        return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
+        //             'user' => $this->getUser()));
+        //         break;        
     }
 
     /**

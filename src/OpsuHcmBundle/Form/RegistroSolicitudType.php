@@ -13,7 +13,16 @@ class RegistroSolicitudType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('centroMedico')->add('tratamiento')->add('montoSolicitado')->add('observacion')->add('informeMedicoRuta')->add('presupuestoRuta')->add('fechaAprobado')->add('completado')->add('idestatus')->add('idpaciente')->add('idpatologia')->add('idsolicitud')->add('idtiposolicitud')->add('idtitular');
+        $builder
+        ->add('tratamiento')
+        ->add('observacion')
+        ->add('informeMedicoRuta')
+        ->add('fechaAprobado')
+        ->add('completado')
+        ->add('idestatus')
+        ->add('idpaciente')
+        ->add('idpatologia')
+        ->add('idsolicitud');
     }
     
     /**

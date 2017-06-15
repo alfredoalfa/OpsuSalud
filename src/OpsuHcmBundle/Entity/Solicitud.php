@@ -53,6 +53,15 @@ class Solicitud
      */
     private $idtitular;
 
+    /**
+     * @var \Tiposolicitud
+     *
+     * @ORM\ManyToOne(targetEntity="Tiposolicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idtiposolicitud", referencedColumnName="id")
+     * })
+     */
+    private $idtiposolicitud;
 
 
     /**
@@ -155,5 +164,28 @@ class Solicitud
     public function getIdtitular()
     {
         return $this->idtitular;
+    }
+
+    /**
+     * Set idtiposolicitud
+     *
+     * @param \OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud
+     * @return Solicitud
+     */
+    public function setIdtiposolicitud(\OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud = null)
+    {
+        $this->idtiposolicitud = $idtiposolicitud;
+
+        return $this;
+    }
+
+    /**
+     * Get idtiposolicitud
+     *
+     * @return \OpsuHcmBundle\Entity\Tiposolicitud 
+     */
+    public function getIdtiposolicitud()
+    {
+        return $this->idtiposolicitud;
     }
 }

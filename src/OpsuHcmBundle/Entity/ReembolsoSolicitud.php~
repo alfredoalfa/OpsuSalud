@@ -1,0 +1,72 @@
+<?php
+
+namespace OpsuHcmBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ReembolsoSolicitud
+ *
+ * @ORM\Table(name="reembolso_solicitud")
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\ReembolsoSolicitudRepository")
+ */
+class ReembolsoSolicitud
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var \RegistroSolicitud
+     *
+     * @ORM\ManyToOne(targetEntity="RegistroSolicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idregistrosolicitud", referencedColumnName="id")
+     * })
+     */
+    private $idregistroSolicitud;
+
+    /**
+     * @var \CentroMedico
+     *
+     * @ORM\ManyToOne(targetEntity="CentroMedico")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idcentromedico", referencedColumnName="id")
+     * })
+     */
+    private $idcentroMedico;
+
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $montoSolicitado;
+
+     /**
+     * @var string
+     *
+     * @ORM\Column(name="presupuesto_recibo_ruta", type="text", nullable=true)
+     */
+    private $presupuestoReciboRuta;
+
+    /**
+     * @ORM\Column(type="decimal", scale=2)
+     */
+    private $montoAprobado;
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+}

@@ -6,8 +6,6 @@
       <index name="IDX_3C2E4C86C1EE153" columns="idpaciente"/>
       <index name="IDX_3C2E4C869E0B680" columns="idpatologia"/>
       <index name="IDX_3C2E4C8E8C9D535" columns="idsolicitud"/>
-      <index name="IDX_3C2E4C8174D74B2" columns="idtiposolicitud"/>
-      <index name="IDX_3C2E4C8A62749A9" columns="idtitular"/>
     </indexes>
     <id name="id" type="integer" column="id">
       <generator strategy="SEQUENCE"/>

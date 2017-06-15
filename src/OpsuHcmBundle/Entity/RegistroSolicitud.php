@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * RegistroSolicitud
  *
- * @ORM\Table(name="registro_solicitud", indexes={@ORM\Index(name="IDX_3C2E4C851242AED", columns={"idestatus"}), @ORM\Index(name="IDX_3C2E4C86C1EE153", columns={"idpaciente"}), @ORM\Index(name="IDX_3C2E4C869E0B680", columns={"idpatologia"}), @ORM\Index(name="IDX_3C2E4C8E8C9D535", columns={"idsolicitud"}), @ORM\Index(name="IDX_3C2E4C8174D74B2", columns={"idtiposolicitud"}), @ORM\Index(name="IDX_3C2E4C8A62749A9", columns={"idtitular"})})
+ * @ORM\Table(name="registro_solicitud", indexes={@ORM\Index(name="IDX_3C2E4C851242AED", columns={"idestatus"}), @ORM\Index(name="IDX_3C2E4C86C1EE153", columns={"idpaciente"}), @ORM\Index(name="IDX_3C2E4C869E0B680", columns={"idpatologia"}), @ORM\Index(name="IDX_3C2E4C8E8C9D535", columns={"idsolicitud"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\RegistroSolicitud")
  */
 class RegistroSolicitud
@@ -25,23 +25,9 @@ class RegistroSolicitud
     /**
      * @var string
      *
-     * @ORM\Column(name="centro_medico", type="string", length=255, nullable=true)
-     */
-    private $centroMedico;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="tratamiento", type="text", nullable=true)
      */
     private $tratamiento;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="monto_solicitado", type="decimal", precision=10, scale=0, nullable=true)
-     */
-    private $montoSolicitado;
 
     /**
      * @var string
@@ -56,13 +42,6 @@ class RegistroSolicitud
      * @ORM\Column(name="informe_medico_ruta", type="text", nullable=true)
      */
     private $informeMedicoRuta;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="presupuesto_ruta", type="string", length=255, nullable=false)
-     */
-    private $presupuestoRuta;
 
     /**
      * @var \DateTime
@@ -118,27 +97,6 @@ class RegistroSolicitud
      */
     private $idsolicitud;
 
-    /**
-     * @var \Tiposolicitud
-     *
-     * @ORM\ManyToOne(targetEntity="Tiposolicitud")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtiposolicitud", referencedColumnName="id")
-     * })
-     */
-    private $idtiposolicitud;
-
-    /**
-     * @var \Titular
-     *
-     * @ORM\ManyToOne(targetEntity="Titular")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtitular", referencedColumnName="id")
-     * })
-     */
-    private $idtitular;
-
-
 
     /**
      * Get id
@@ -148,29 +106,6 @@ class RegistroSolicitud
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set centroMedico
-     *
-     * @param string $centroMedico
-     * @return RegistroSolicitud
-     */
-    public function setCentroMedico($centroMedico)
-    {
-        $this->centroMedico = $centroMedico;
-
-        return $this;
-    }
-
-    /**
-     * Get centroMedico
-     *
-     * @return string 
-     */
-    public function getCentroMedico()
-    {
-        return $this->centroMedico;
     }
 
     /**
@@ -194,29 +129,6 @@ class RegistroSolicitud
     public function getTratamiento()
     {
         return $this->tratamiento;
-    }
-
-    /**
-     * Set montoSolicitado
-     *
-     * @param string $montoSolicitado
-     * @return RegistroSolicitud
-     */
-    public function setMontoSolicitado($montoSolicitado)
-    {
-        $this->montoSolicitado = $montoSolicitado;
-
-        return $this;
-    }
-
-    /**
-     * Get montoSolicitado
-     *
-     * @return string 
-     */
-    public function getMontoSolicitado()
-    {
-        return $this->montoSolicitado;
     }
 
     /**
@@ -263,29 +175,6 @@ class RegistroSolicitud
     public function getInformeMedicoRuta()
     {
         return $this->informeMedicoRuta;
-    }
-
-    /**
-     * Set presupuestoRuta
-     *
-     * @param string $presupuestoRuta
-     * @return RegistroSolicitud
-     */
-    public function setPresupuestoRuta($presupuestoRuta)
-    {
-        $this->presupuestoRuta = $presupuestoRuta;
-
-        return $this;
-    }
-
-    /**
-     * Get presupuestoRuta
-     *
-     * @return string 
-     */
-    public function getPresupuestoRuta()
-    {
-        return $this->presupuestoRuta;
     }
 
     /**
@@ -424,51 +313,5 @@ class RegistroSolicitud
     public function getIdsolicitud()
     {
         return $this->idsolicitud;
-    }
-
-    /**
-     * Set idtiposolicitud
-     *
-     * @param \OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud
-     * @return RegistroSolicitud
-     */
-    public function setIdtiposolicitud(\OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud = null)
-    {
-        $this->idtiposolicitud = $idtiposolicitud;
-
-        return $this;
-    }
-
-    /**
-     * Get idtiposolicitud
-     *
-     * @return \OpsuHcmBundle\Entity\Tiposolicitud 
-     */
-    public function getIdtiposolicitud()
-    {
-        return $this->idtiposolicitud;
-    }
-
-    /**
-     * Set idtitular
-     *
-     * @param \OpsuHcmBundle\Entity\Titular $idtitular
-     * @return RegistroSolicitud
-     */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Titular $idtitular = null)
-    {
-        $this->idtitular = $idtitular;
-
-        return $this;
-    }
-
-    /**
-     * Get idtitular
-     *
-     * @return \OpsuHcmBundle\Entity\Titular 
-     */
-    public function getIdtitular()
-    {
-        return $this->idtitular;
     }
 }

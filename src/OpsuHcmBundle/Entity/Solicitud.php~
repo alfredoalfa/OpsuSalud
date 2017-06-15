@@ -53,107 +53,14 @@ class Solicitud
      */
     private $idtitular;
 
-
-
     /**
-     * Get id
+     * @var \Tiposolicitud
      *
-     * @return integer 
+     * @ORM\ManyToOne(targetEntity="Tiposolicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idtiposolicitud", referencedColumnName="id")
+     * })
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $idtiposolicitud;
 
-    /**
-     * Set fechaSolicitud
-     *
-     * @param \DateTime $fechaSolicitud
-     * @return Solicitud
-     */
-    public function setFechaSolicitud($fechaSolicitud)
-    {
-        $this->fechaSolicitud = $fechaSolicitud;
-
-        return $this;
-    }
-
-    /**
-     * Get fechaSolicitud
-     *
-     * @return \DateTime 
-     */
-    public function getFechaSolicitud()
-    {
-        return $this->fechaSolicitud;
-    }
-
-    /**
-     * Set observacion
-     *
-     * @param string $observacion
-     * @return Solicitud
-     */
-    public function setObservacion($observacion)
-    {
-        $this->observacion = $observacion;
-
-        return $this;
-    }
-
-    /**
-     * Get observacion
-     *
-     * @return string 
-     */
-    public function getObservacion()
-    {
-        return $this->observacion;
-    }
-
-    /**
-     * Set completado
-     *
-     * @param boolean $completado
-     * @return Solicitud
-     */
-    public function setCompletado($completado)
-    {
-        $this->completado = $completado;
-
-        return $this;
-    }
-
-    /**
-     * Get completado
-     *
-     * @return boolean 
-     */
-    public function getCompletado()
-    {
-        return $this->completado;
-    }
-
-    /**
-     * Set idtitular
-     *
-     * @param \OpsuHcmBundle\Entity\Titular $idtitular
-     * @return Solicitud
-     */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Titular $idtitular = null)
-    {
-        $this->idtitular = $idtitular;
-
-        return $this;
-    }
-
-    /**
-     * Get idtitular
-     *
-     * @return \OpsuHcmBundle\Entity\Titular 
-     */
-    public function getIdtitular()
-    {
-        return $this->idtitular;
-    }
 }
