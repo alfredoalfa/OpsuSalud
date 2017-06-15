@@ -28,6 +28,21 @@ class CentroMedico
      */
     private $descripcion;
 
+   /**
+     * @var string
+     *
+     * @ORM\Column(name="telefono", type="string", length=11, nullable=true)
+     */
+    private $telefono;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="direccion", type="text", nullable=true)
+     */
+    private $direccion;
+
+
 
     /**
      * Get id
