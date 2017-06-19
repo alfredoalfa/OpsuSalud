@@ -149,13 +149,10 @@ class PersonaController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            
-            $user = $this->getUser();
-            $idusuario = $user->getid();
+
             $em = $this->getDoctrine()->getManager();
-            
-           // $em->setIdUsuario($user);
             $em->persist($persona);
+            
             print_r(dump($persona));
             die();
             //$em->flush();
