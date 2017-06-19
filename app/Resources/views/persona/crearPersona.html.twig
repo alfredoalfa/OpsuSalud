@@ -1,0 +1,36 @@
+{% extends 'menu.html.twig' %}
+
+{% block content -%}
+<div class="col-md-12">
+
+    <h4 style="color:#3371B5">Personas nuevo</h4>
+
+<div class="table-responsive">
+<table class="table">
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="Create" />
+    {{ form_end(form) }}
+
+    <ul>
+        <li>
+            <a href="{{ path('persona_index') }}">Back to the list</a>
+        </li>
+    </ul>
+    </table>
+</dir>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/js/estados.js') }}"></script>
+ <script type="text/javascript">
+            $(function () {
+                //alert('piker');
+                $('#opsuhcmbundle_persona_fechaNacimiento').datetimepicker({
+                viewMode: 'years',
+                format: 'YYYY-MM-DD'
+            });
+        });
+        </script>
+{% endblock %}

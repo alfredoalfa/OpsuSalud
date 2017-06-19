@@ -144,21 +144,30 @@ class PersonaController extends Controller
     public function crearPersonaAction(Request $request)
     {
         $persona = new Persona();
-        $form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);
+        $form = $this->createForm($this->get('app.form.type.persona'), $persona);
+        //$form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $user = $this->getUser();
+            $idusuario = $user->getid();
             $em = $this->getDoctrine()->getManager();
+            
+           // $em->setIdUsuario($user);
             $em->persist($persona);
-            $em->flush();
+            print_r(dump($persona));
+            die();
+            //$em->flush();
 
             return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));
         }
        
-        return $this->render('persona/new.html.twig', array(
+        return $this->render('persona/crearPersona.html.twig', array(
             'persona' => $persona,
             'form' => $form->createView(),
         ));
     }
+
 
 }

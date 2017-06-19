@@ -427,11 +427,11 @@ class Persona
     /**
      * Set idusuario
      *
-     * @param integer $idusuario
+     * @param \AppBundle\Entity\User $idusuario
      * @return Persona
      */
-    public function setIdUsuario(\AppBundle\Entity\User $idUsuario = null)
-    {
+    public function setIdUsuario(\AppBundle\Entity\User $idusuario = null)
+    {    
         $this->idusuario = $idusuario;
 
         return $this;

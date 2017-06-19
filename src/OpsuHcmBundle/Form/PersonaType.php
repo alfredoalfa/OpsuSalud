@@ -5,14 +5,28 @@ namespace OpsuHcmBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\FormEvents;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Security\Core\SecurityContext;
 
 class PersonaType extends AbstractType
 {
+
+    private $securityContext;
+
+    public function __construct(SecurityContext $securityContext)
+    {
+        $this->securityContext = $securityContext;
+    }
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        // Current logged user
+        $user = $this->securityContext->getToken()->getUser();
+
         $builder
         ->add('primerApellido')
         ->add('segundoApellido')
@@ -27,12 +41,28 @@ class PersonaType extends AbstractType
                     'class' => 'datepicker',
                     'placeholder'=>'Indique la Fecha Nacimiento')))
         ->add('direccion')
-        ->add('genero')
+        ->add('genero', 'choice'/*ChoiceType::class*/, array(
+                'choices' => array(
+                    'M'=>'Masculino',
+                    'F'=>'Femenino'),
+                'required'    => true,
+            ))
         ->add('telefono1')
         ->add('telefono2')
         ->add('cedulaRuta')
         ->add('carnetRuta')
         ->add('idnacionalidad')
+
+         ->add('idusuario', EntityType::class, array(
+                'class' => 'AppBundle:User',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->orderBy('u.username', 'ASC')
+                        ->where('u.id = :idusuario')
+                        ->setParameter('idusuario',$this->securityContext->getToken()->getUser()); 
+                },
+                'label'=>'Titular',
+            ))
 
         ->add('idEstado', 'entity', array(
             'class' => 'OpsuHcmBundle:Estado',
@@ -53,6 +83,7 @@ class PersonaType extends AbstractType
             'empty_value' => 'Seleccione...',
             'label'=>'Parroquia',
         ));
+
     }
     
     /**
@@ -73,5 +104,6 @@ class PersonaType extends AbstractType
         return 'opsuhcmbundle_persona';
     }
 
+    
 
 }

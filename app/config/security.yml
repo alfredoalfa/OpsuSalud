@@ -8,9 +8,10 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#hierarchical-roles
     role_hierarchy:
-        ROLE_TEMPORAL:    ROLE_TEMPORAL # los usuarios registrados son ROLE_TEMPORAL hasta que completen el registro
-        ROLE_ADMIN:       ROLE_USER # los usuarios con rol ROLE_ADMIN también tengan el rol ROLE_USER.
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH] #asignar el rol ROLE_SUPER_ADMIN 
+        ROLE_TEMPORAL:    ROLE_TEMPORAL # los usuarios registrados son ROLE_TEMPORAL hasta que completen el registro.
+        ROLE_AFILIADO:    ROLE_AFILIADO
+        ROLE_ADMIN_OPSU:  ROLE_ADMIN_OPSU
+        ROLE_SUPER_ADMIN: [ROLE_AFILIADO, ROLE_ADMIN_OPSU, ROLE_ALLOWED_TO_SWITCH] #asignar el rol ROLE_SUPER_ADMIN 
         #implica que se han asignado también los roles ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH y ROLE_USER.
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
@@ -44,7 +45,8 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(css|js), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(_wdt|_profiler), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/persona/crearpersona/, roles: [ROLE_TEMPORAL] }
+        - { path: ^/, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN_OPSU, ROLE_AFILIADO] }
         #- { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
         #- { path: ^/integracionmod/secured, roles: IS_AUTHENTICATED_ANONYMOUSLY }
