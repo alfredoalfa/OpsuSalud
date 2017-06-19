@@ -22,7 +22,6 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         $roles = $user->getRoles();
-
     
         switch ($roles[0]) {
             case "ROLE_TEMPORAL":

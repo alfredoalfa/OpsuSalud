@@ -3,23 +3,73 @@
 {% block content -%}
 <div class="col-md-12">
 
-    <h4 style="color:#3371B5">Personas nuevo</h4>
+    <h3 style="color:#3371B5">Registro Datos Personales</h3>
+    <h4>Por favor llene los campos solicitados a continuacion</h4>
 
-<div class="table-responsive">
-<table class="table">
+ <div class="col-md-12">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Registro Usuarios</h3>
+        </div>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+        <div class="panel-body"><!--contenido panel>-->
+          <div class="row">
+{{ form_start(form) }}
+    {{ form_errors(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('persona_index') }}">Back to the list</a>
-        </li>
-    </ul>
-    </table>
-</dir>
+    <div class="col-md-3">
+        {{ form_row(form.primerApellido) }}
+        {{ form_row(form.idnacionalidad) }}
+        {{ form_row(form.telefono1) }}
+    </div>
+
+    <div class="col-md-3">
+        {{ form_row(form.segundoApellido) }}
+        {{ form_row(form.cedula) }}
+        {{ form_row(form.telefono2) }}
+    </div>
+
+    <div class="col-md-3">
+        {{ form_row(form.primerNombre) }}
+        {{ form_row(form.genero) }}
+        {{ form_row(form.idusuario) }}
+    </div>
+
+    <div class="col-md-3">
+        {{ form_row(form.segundoNombre) }}
+        {{ form_row(form.fechaNacimiento) }}
+    </div>
+
+    <div class="col-md-4">     
+        {{ form_row(form.idEstado) }}
+    </div>
+    
+    <div class="col-md-4">
+        {{ form_row(form.idMunicipio) }}
+    </div>
+
+    <div class="col-md-4">
+        {{ form_row(form.idparroquia) }}
+    </div>
+
+    <div class="col-md-12">
+        {{ form_row(form.direccion) }}
+    </div>
+     <div class="col-md-3">
+               {{ form_row(form.cedulaRuta) }}
+        {{ form_row(form.carnetRuta) }}
+    </div>
+
+    <div class="col-md-12">
+        <input type="submit" value="Guardar" class="btn btn-primary center-block"/>
+        {{ form_end(form) }} 
+    </div>
+
+        </div> <!--/row-->
+      </div> <!--/cierra panel-->
+    </div><!--/cierra panel primary-->
+</div><!-- /contenido  formularo-->
+
 {% endblock %}
 {% block javascripts %}
 {{ parent() }}

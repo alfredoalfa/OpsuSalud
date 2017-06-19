@@ -37,8 +37,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         # vendor/symfony/symfony/Bridge/Twig/Resources/views/Form
-        # resources: ['bootstrap_3_layout.html.twig']
-        resources: ['bootstrap_3_horizontal_layout.html.twig']
+        resources: ['bootstrap_3_layout.html.twig']
+        #resources: ['bootstrap_3_horizontal_layout.html.twig']
         # resources: [form_table_layout.html.twig]
         # resources: [foundation_5_layout.html.twig]
 
