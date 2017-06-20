@@ -8,6 +8,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Persona
+ * @Vich\Uploadable
  *
  * @ORM\Table(name="persona", indexes={@ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Persona")

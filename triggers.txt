@@ -1,0 +1,68 @@
+***insertar***
+create or replace function insertar_trigger_personas() returns trigger as $insertar$
+declare begin
+
+INSERT INTO auditoria(
+            entidad, sentencia, usuario, fecha)
+	    VALUES ('Personas','Insert',session_user,now());
+return null;
+end;
+$insertar$ language plpgsql;
+
+create trigger insertar_trigger_personas after insert
+on personas for each row
+execute procedure insertar_trigger_personas();
+
+****************************************************
+****actualizar*****
+create or replace function actualizar_trigger_personas() returns trigger as $actualizar$
+declare begin
+
+INSERT INTO auditoria(
+            entidad, sentencia, usuario, fecha)
+	    VALUES ('personas','Actualizar',session_user,now());
+return null;
+end;
+$actualizar$ language plpgsql;
+
+
+create trigger actualizar_trigger_personas after update
+on personas for each row
+execute procedure actualizar_trigger_personas();
+
+****************************************************
+*****eliminar**********
+create or replace function eliminar_trigger_personas() returns trigger as $eliminar$
+declare begin
+
+INSERT INTO auditoria(
+            entidad, sentencia, usuario, fecha)
+	    VALUES ('Personas','Eliminar',session_user,now());
+return null;
+end;
+$eliminar$ language plpgsql;
+
+create trigger eliminar_trigger_personas after delete
+on personas for each row
+execute procedure eliminar_trigger_personas();
+
+
+****************************trigger para personas con fos user*********
+***********************************************************************
+
+create or replace function insertar_trigger_persona() returns trigger as $insertar$
+declare begin
+
+UPDATE public.fos_user SET roles = 'a:1:{i:0;s:13:"ROLE_AFILIADO";}';
+
+return null;
+end;
+$insertar$ language plpgsql;
+
+create trigger modificar_trigger_persona after insert
+on persona for each row
+execute procedure insertar_trigger_persona();
+
+
+
+php app/console doctrine:schema:update --dump-sql

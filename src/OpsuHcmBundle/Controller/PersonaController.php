@@ -153,8 +153,8 @@ class PersonaController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->persist($persona);
             
-            print_r(dump($persona));
-            die();
+             print_r(dump($persona));
+             die();
             //$em->flush();
 
             return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));
