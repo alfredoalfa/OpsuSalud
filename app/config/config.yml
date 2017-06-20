@@ -82,3 +82,21 @@ fos_user:
             from_email:
                 address:        alfredolcontrerasl@gmail.com
                 sender_name:    Acme Demo Resetting
+
+vich_uploader:
+    db_driver: orm # or mongodb or propel or phpcr
+
+    mappings:
+        cedula_doc:
+            uri_prefix:         /uploads/documentos
+            upload_destination: '%kernel.root_dir%/../web/uploads/documentos'
+            namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
+        carnet_doc:
+            uri_prefix:         /uploads/documentos
+            upload_destination: '%kernel.root_dir%/../web/uploads/documentos'
+            namer:              vich_uploader.namer_uniqid
+            delete_on_update:   true
+            delete_on_remove:   true
+

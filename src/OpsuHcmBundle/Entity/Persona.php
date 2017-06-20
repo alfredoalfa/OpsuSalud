@@ -3,6 +3,8 @@
 namespace OpsuHcmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Persona
@@ -93,20 +95,6 @@ class Persona
     private $telefono2;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cedula_ruta", type="string", length=255, nullable=false)
-     */
-    private $cedulaRuta;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="carnet_ruta", type="string", length=255, nullable=false)
-     */
-    private $carnetRuta;
-
-    /**
      * @var \FosUser
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
@@ -136,7 +124,42 @@ class Persona
      */
     private $idparroquia;
 
+     /**
+     * 
+     * @Vich\UploadableField(mapping="cedula_doc", fileNameProperty="cedulaRuta")
+     * 
+     * @var File $cedulaFile
+     */
+    private $cedulaFile;
 
+    /**
+     * @var string $cedulaRuta
+     *
+     * @ORM\Column(name="cedula_ruta", type="string", length=255)
+     */
+    private $cedulaRuta;
+
+     /**
+     * 
+     * @Vich\UploadableField(mapping="carnet_doc", fileNameProperty="carnetRuta")
+     * 
+     * @var File $carnetFile
+     */
+    private $carnetFile;
+
+     /**
+     * @var string $carnetRuta
+     *
+     * @ORM\Column(name="carnet_ruta", type="string", length=255)
+     */
+    private $carnetRuta;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * Get id
@@ -495,5 +518,45 @@ class Persona
     
     public function __toString(){
         return $this->idparroquia;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $cedulaFile
+     */
+    public function setCedulaFile(File $cedulaFile = null)
+    {
+        $this->cedulaFile = $cedulaFile;
+
+        if ($cedulaFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getCedulaFile()
+    {
+        return $this->cedulaFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $carnetFile
+     */
+    public function setCarnetFile(File $carnetFile = null)
+    {
+        $this->carnetFile = $carnetFile;
+
+        if ($carnetFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getCarnetFile()
+    {
+        return $this->carnetFile;
     }
 }

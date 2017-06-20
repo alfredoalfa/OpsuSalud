@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormEvents;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Security\Core\SecurityContext;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class PersonaType extends AbstractType
 {
@@ -49,8 +50,8 @@ class PersonaType extends AbstractType
             ))
         ->add('telefono1')
         ->add('telefono2')
-        ->add('cedulaRuta')
-        ->add('carnetRuta')
+        ->add('cedulaFile', FileType::class, array('label' => 'Copia de la ceula (JPG archivo)'))
+        ->add('carnetFile', FileType::class, array('label' => 'Copia del Carnet (JPG archivo)'))
         ->add('idnacionalidad')
 
          ->add('idusuario', EntityType::class, array(
