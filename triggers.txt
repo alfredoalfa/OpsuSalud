@@ -80,3 +80,21 @@ git reset --soft HEAD~1
 Y si no quieres mantenerlos (y volver al estado del commit anterior, en la práctica, destruir el último commit completamente como si nunca hubiera existido):
 
 git reset --hard HEAD~1
+
+
+***********************postgres******************
+
+POSTGRESQL 9.1.12
+
+DUMP:
+
+pg_dump -U user bd_name > archive_name.sql
+
+put the user password and press enter.
+
+RESTORE:
+
+psql -U user db_name < /directory/archive.sql
+
+put the user password and press enter.
+

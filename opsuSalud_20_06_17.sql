@@ -2,10 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.7
--- Dumped by pg_dump version 9.5.7
-
--- Started on 2017-06-19 09:52:24 VET
+-- Dumped from database version 9.5.6
+-- Dumped by pg_dump version 9.5.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -16,7 +14,6 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 1 (class 3079 OID 12435)
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
@@ -24,8 +21,6 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- TOC entry 2415 (class 0 OID 0)
--- Dependencies: 1
 -- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
@@ -34,12 +29,29 @@ COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 SET search_path = public, pg_catalog;
 
+--
+-- Name: insertar_trigger_persona(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+
+CREATE FUNCTION insertar_trigger_persona() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+declare begin
+
+UPDATE public.fos_user SET roles = 'a:1:{i:0;s:13:"ROLE_AFILIADO";}';
+
+return null;
+end;
+$$;
+
+
+ALTER FUNCTION public.insertar_trigger_persona() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- TOC entry 183 (class 1259 OID 16953)
 -- Name: afiliado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -54,7 +66,6 @@ CREATE TABLE afiliado (
 ALTER TABLE afiliado OWNER TO postgres;
 
 --
--- TOC entry 184 (class 1259 OID 16956)
 -- Name: afiliado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -69,7 +80,6 @@ CREATE SEQUENCE afiliado_id_seq
 ALTER TABLE afiliado_id_seq OWNER TO postgres;
 
 --
--- TOC entry 185 (class 1259 OID 16958)
 -- Name: auditoria; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -87,7 +97,6 @@ CREATE TABLE auditoria (
 ALTER TABLE auditoria OWNER TO postgres;
 
 --
--- TOC entry 186 (class 1259 OID 16968)
 -- Name: auditoria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -102,7 +111,6 @@ CREATE SEQUENCE auditoria_id_seq
 ALTER TABLE auditoria_id_seq OWNER TO postgres;
 
 --
--- TOC entry 217 (class 1259 OID 17202)
 -- Name: casos_asignado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -117,7 +125,6 @@ CREATE TABLE casos_asignado (
 ALTER TABLE casos_asignado OWNER TO postgres;
 
 --
--- TOC entry 214 (class 1259 OID 17193)
 -- Name: casos_asignado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -132,7 +139,6 @@ CREATE SEQUENCE casos_asignado_id_seq
 ALTER TABLE casos_asignado_id_seq OWNER TO postgres;
 
 --
--- TOC entry 216 (class 1259 OID 17197)
 -- Name: centro_medico; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -147,7 +153,6 @@ CREATE TABLE centro_medico (
 ALTER TABLE centro_medico OWNER TO postgres;
 
 --
--- TOC entry 213 (class 1259 OID 17191)
 -- Name: centro_medico_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -162,7 +167,6 @@ CREATE SEQUENCE centro_medico_id_seq
 ALTER TABLE centro_medico_id_seq OWNER TO postgres;
 
 --
--- TOC entry 187 (class 1259 OID 16970)
 -- Name: estado; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -176,7 +180,6 @@ CREATE TABLE estado (
 ALTER TABLE estado OWNER TO postgres;
 
 --
--- TOC entry 188 (class 1259 OID 16974)
 -- Name: estado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -191,8 +194,6 @@ CREATE SEQUENCE estado_id_seq
 ALTER TABLE estado_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2416 (class 0 OID 0)
--- Dependencies: 188
 -- Name: estado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -200,7 +201,6 @@ ALTER SEQUENCE estado_id_seq OWNED BY estado.id;
 
 
 --
--- TOC entry 189 (class 1259 OID 16976)
 -- Name: estatus; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -213,7 +213,6 @@ CREATE TABLE estatus (
 ALTER TABLE estatus OWNER TO postgres;
 
 --
--- TOC entry 190 (class 1259 OID 16980)
 -- Name: estatus_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -228,7 +227,6 @@ CREATE SEQUENCE estatus_id_seq
 ALTER TABLE estatus_id_seq OWNER TO postgres;
 
 --
--- TOC entry 191 (class 1259 OID 16982)
 -- Name: fos_user; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -256,8 +254,6 @@ CREATE TABLE fos_user (
 ALTER TABLE fos_user OWNER TO postgres;
 
 --
--- TOC entry 2417 (class 0 OID 0)
--- Dependencies: 191
 -- Name: COLUMN fos_user.roles; Type: COMMENT; Schema: public; Owner: postgres
 --
 
@@ -265,7 +261,6 @@ COMMENT ON COLUMN fos_user.roles IS '(DC2Type:array)';
 
 
 --
--- TOC entry 192 (class 1259 OID 16993)
 -- Name: fos_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -280,7 +275,6 @@ CREATE SEQUENCE fos_user_id_seq
 ALTER TABLE fos_user_id_seq OWNER TO postgres;
 
 --
--- TOC entry 193 (class 1259 OID 16995)
 -- Name: municipio; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -294,7 +288,6 @@ CREATE TABLE municipio (
 ALTER TABLE municipio OWNER TO postgres;
 
 --
--- TOC entry 194 (class 1259 OID 16999)
 -- Name: municipio_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -309,8 +302,6 @@ CREATE SEQUENCE municipio_id_seq
 ALTER TABLE municipio_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2418 (class 0 OID 0)
--- Dependencies: 194
 -- Name: municipio_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
 
@@ -318,7 +309,6 @@ ALTER SEQUENCE municipio_id_seq OWNED BY municipio.id;
 
 
 --
--- TOC entry 195 (class 1259 OID 17001)
 -- Name: nacionalidad; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -331,7 +321,6 @@ CREATE TABLE nacionalidad (
 ALTER TABLE nacionalidad OWNER TO postgres;
 
 --
--- TOC entry 196 (class 1259 OID 17005)
 -- Name: nacionalidad_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -346,7 +335,6 @@ CREATE SEQUENCE nacionalidad_id_seq
 ALTER TABLE nacionalidad_id_seq OWNER TO postgres;
 
 --
--- TOC entry 197 (class 1259 OID 17007)
 -- Name: parentesco; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -359,7 +347,6 @@ CREATE TABLE parentesco (
 ALTER TABLE parentesco OWNER TO postgres;
 
 --
--- TOC entry 198 (class 1259 OID 17011)
 -- Name: parentesco_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -374,7 +361,6 @@ CREATE SEQUENCE parentesco_id_seq
 ALTER TABLE parentesco_id_seq OWNER TO postgres;
 
 --
--- TOC entry 199 (class 1259 OID 17013)
 -- Name: parroquia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -388,7 +374,6 @@ CREATE TABLE parroquia (
 ALTER TABLE parroquia OWNER TO postgres;
 
 --
--- TOC entry 200 (class 1259 OID 17017)
 -- Name: parroquia_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -403,7 +388,6 @@ CREATE SEQUENCE parroquia_id_seq
 ALTER TABLE parroquia_id_seq OWNER TO postgres;
 
 --
--- TOC entry 201 (class 1259 OID 17019)
 -- Name: patologia; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -416,7 +400,6 @@ CREATE TABLE patologia (
 ALTER TABLE patologia OWNER TO postgres;
 
 --
--- TOC entry 202 (class 1259 OID 17023)
 -- Name: patologia_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -431,7 +414,6 @@ CREATE SEQUENCE patologia_id_seq
 ALTER TABLE patologia_id_seq OWNER TO postgres;
 
 --
--- TOC entry 203 (class 1259 OID 17025)
 -- Name: persona; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -451,14 +433,14 @@ CREATE TABLE persona (
     cedula_ruta character varying(255) DEFAULT NULL::character varying NOT NULL,
     carnet_ruta character varying(255) DEFAULT NULL::character varying NOT NULL,
     idparroquia integer,
-    idusuario integer
+    idusuario integer,
+    updated_at timestamp(0) without time zone
 );
 
 
 ALTER TABLE persona OWNER TO postgres;
 
 --
--- TOC entry 204 (class 1259 OID 17038)
 -- Name: persona_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -473,7 +455,6 @@ CREATE SEQUENCE persona_id_seq
 ALTER TABLE persona_id_seq OWNER TO postgres;
 
 --
--- TOC entry 218 (class 1259 OID 17209)
 -- Name: reembolso_solicitud; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -490,7 +471,6 @@ CREATE TABLE reembolso_solicitud (
 ALTER TABLE reembolso_solicitud OWNER TO postgres;
 
 --
--- TOC entry 215 (class 1259 OID 17195)
 -- Name: reembolso_solicitud_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -505,7 +485,6 @@ CREATE SEQUENCE reembolso_solicitud_id_seq
 ALTER TABLE reembolso_solicitud_id_seq OWNER TO postgres;
 
 --
--- TOC entry 205 (class 1259 OID 17040)
 -- Name: registro_solicitud; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -526,7 +505,6 @@ CREATE TABLE registro_solicitud (
 ALTER TABLE registro_solicitud OWNER TO postgres;
 
 --
--- TOC entry 206 (class 1259 OID 17048)
 -- Name: registro_solicitud_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -541,7 +519,6 @@ CREATE SEQUENCE registro_solicitud_id_seq
 ALTER TABLE registro_solicitud_id_seq OWNER TO postgres;
 
 --
--- TOC entry 207 (class 1259 OID 17050)
 -- Name: solicitud; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -558,7 +535,6 @@ CREATE TABLE solicitud (
 ALTER TABLE solicitud OWNER TO postgres;
 
 --
--- TOC entry 208 (class 1259 OID 17056)
 -- Name: solicitud_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -573,7 +549,6 @@ CREATE SEQUENCE solicitud_id_seq
 ALTER TABLE solicitud_id_seq OWNER TO postgres;
 
 --
--- TOC entry 209 (class 1259 OID 17058)
 -- Name: tiposolicitud; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -586,7 +561,6 @@ CREATE TABLE tiposolicitud (
 ALTER TABLE tiposolicitud OWNER TO postgres;
 
 --
--- TOC entry 210 (class 1259 OID 17062)
 -- Name: tiposolicitud_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -601,7 +575,6 @@ CREATE SEQUENCE tiposolicitud_id_seq
 ALTER TABLE tiposolicitud_id_seq OWNER TO postgres;
 
 --
--- TOC entry 211 (class 1259 OID 17064)
 -- Name: titular; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -614,7 +587,6 @@ CREATE TABLE titular (
 ALTER TABLE titular OWNER TO postgres;
 
 --
--- TOC entry 212 (class 1259 OID 17067)
 -- Name: titular_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
@@ -629,8 +601,6 @@ CREATE SEQUENCE titular_id_seq
 ALTER TABLE titular_id_seq OWNER TO postgres;
 
 --
--- TOC entry 2372 (class 0 OID 16953)
--- Dependencies: 183
 -- Data for Name: afiliado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -639,8 +609,6 @@ COPY afiliado (id, idtitular, idpersona, idparentesco) FROM stdin;
 
 
 --
--- TOC entry 2419 (class 0 OID 0)
--- Dependencies: 184
 -- Name: afiliado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -648,8 +616,6 @@ SELECT pg_catalog.setval('afiliado_id_seq', 1, false);
 
 
 --
--- TOC entry 2374 (class 0 OID 16958)
--- Dependencies: 185
 -- Data for Name: auditoria; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -658,8 +624,6 @@ COPY auditoria (id, fecha_accion, usuario_id, tabla, accion, campo, descripcion)
 
 
 --
--- TOC entry 2420 (class 0 OID 0)
--- Dependencies: 186
 -- Name: auditoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -667,8 +631,6 @@ SELECT pg_catalog.setval('auditoria_id_seq', 1, false);
 
 
 --
--- TOC entry 2406 (class 0 OID 17202)
--- Dependencies: 217
 -- Data for Name: casos_asignado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -677,8 +639,6 @@ COPY casos_asignado (id, idsolicitud, idanalista, completado) FROM stdin;
 
 
 --
--- TOC entry 2421 (class 0 OID 0)
--- Dependencies: 214
 -- Name: casos_asignado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -686,8 +646,6 @@ SELECT pg_catalog.setval('casos_asignado_id_seq', 1, false);
 
 
 --
--- TOC entry 2405 (class 0 OID 17197)
--- Dependencies: 216
 -- Data for Name: centro_medico; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -770,8 +728,6 @@ COPY centro_medico (id, descripcion, telefono, direccion) FROM stdin;
 
 
 --
--- TOC entry 2422 (class 0 OID 0)
--- Dependencies: 213
 -- Name: centro_medico_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -779,8 +735,6 @@ SELECT pg_catalog.setval('centro_medico_id_seq', 1, false);
 
 
 --
--- TOC entry 2376 (class 0 OID 16970)
--- Dependencies: 187
 -- Data for Name: estado; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -813,8 +767,6 @@ COPY estado (id, descripcion, seleccion) FROM stdin;
 
 
 --
--- TOC entry 2423 (class 0 OID 0)
--- Dependencies: 188
 -- Name: estado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -822,23 +774,15 @@ SELECT pg_catalog.setval('estado_id_seq', 1, false);
 
 
 --
--- TOC entry 2378 (class 0 OID 16976)
--- Dependencies: 189
 -- Data for Name: estatus; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY estatus (id, estatus) FROM stdin;
 1	completado
-2	Entregado
-3	Revisado
-4	Aprobado
-5	No Aprobado
 \.
 
 
 --
--- TOC entry 2424 (class 0 OID 0)
--- Dependencies: 190
 -- Name: estatus_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -846,20 +790,16 @@ SELECT pg_catalog.setval('estatus_id_seq', 1, false);
 
 
 --
--- TOC entry 2380 (class 0 OID 16982)
--- Dependencies: 191
 -- Data for Name: fos_user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY fos_user (id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, locked, expired, expires_at, confirmation_token, password_requested_at, roles, credentials_expired, credentials_expire_at) FROM stdin;
-3	yaperez	yaperez	yaperez@xxx.com	yaperez@xxx.com	t	dqa2d4xpuds8wgssskkwwgc4w0oocko	3pPx0Y27PHcfMt5l6+/ILz0GHCR5BXJLKSaS04KNuUvzDOPrTu2gp5iCLTO5y0JbCca4PxiskwWIpaRZyn1RBw==	2017-06-18 21:29:45	f	f	\N	\N	\N	a:1:{i:0;s:13:"ROLE_TEMPORAL";}	f	\N
-2	acontreras	acontreras	acontreras@opsu.gob.ve	acontreras@opsu.gob.ve	t	k9vfq41bsiogs0800cwc8s8ccc80c0k	Ur/g5jTqFYvVxgP8KubMw5b/SyRxWCk3/2KfeVYQB4jODRAeIJhwOZfKjc5YrSL6QgSfjXjf0sX/bxnKxTVj8g==	2017-06-18 23:43:17	f	f	\N	\N	\N	a:1:{i:0;s:13:"ROLE_TEMPORAL";}	f	\N
+2	acontreras	acontreras	acontreras	acontreras	t	17t8p86tfzxcoks4wc84gwkkos48cc0	SQ5rxy7qwQFdL9ZhRMXdZAlmZ7ayb7MNKqM13nKcy4HFT5Rn+RhlZabYjvAtP6ZzS+0Nw5saRM39O7o4HU4HqQ==	2017-06-20 15:48:30	f	f	\N	\N	\N	a:1:{i:0;s:13:"ROLE_AFILIADO";}	f	\N
+3	lcontreras	lcontreras	lcontreras	lcontreras	t	jx50uout9u88c4gw08kgsc084s4kgs4	yX/oOjo9bGZ2tlm9s7JDnZxbREBErulSanuetDBhXBXXkgr9fCzScLKShchCwkQXJxOrhpp0pwIKgGRICEy4og==	2017-06-20 15:49:42	f	f	\N	\N	\N	a:1:{i:0;s:13:"ROLE_TEMPORAL";}	f	\N
 \.
 
 
 --
--- TOC entry 2425 (class 0 OID 0)
--- Dependencies: 192
 -- Name: fos_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -867,8 +807,6 @@ SELECT pg_catalog.setval('fos_user_id_seq', 3, true);
 
 
 --
--- TOC entry 2382 (class 0 OID 16995)
--- Dependencies: 193
 -- Data for Name: municipio; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1212,8 +1150,6 @@ COPY municipio (id, descripcion, estado_id) FROM stdin;
 
 
 --
--- TOC entry 2426 (class 0 OID 0)
--- Dependencies: 194
 -- Name: municipio_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1221,20 +1157,16 @@ SELECT pg_catalog.setval('municipio_id_seq', 1, false);
 
 
 --
--- TOC entry 2384 (class 0 OID 17001)
--- Dependencies: 195
 -- Data for Name: nacionalidad; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY nacionalidad (id, nacionalidad) FROM stdin;
-1	V
-2	E
+1	M
+2	F
 \.
 
 
 --
--- TOC entry 2427 (class 0 OID 0)
--- Dependencies: 196
 -- Name: nacionalidad_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1242,8 +1174,6 @@ SELECT pg_catalog.setval('nacionalidad_id_seq', 2, true);
 
 
 --
--- TOC entry 2386 (class 0 OID 17007)
--- Dependencies: 197
 -- Data for Name: parentesco; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1256,8 +1186,6 @@ COPY parentesco (id, parentesco) FROM stdin;
 
 
 --
--- TOC entry 2428 (class 0 OID 0)
--- Dependencies: 198
 -- Name: parentesco_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1265,8 +1193,6 @@ SELECT pg_catalog.setval('parentesco_id_seq', 1, false);
 
 
 --
--- TOC entry 2388 (class 0 OID 17013)
--- Dependencies: 199
 -- Data for Name: parroquia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2329,8 +2255,6 @@ COPY parroquia (id, descripcion, municipio_id) FROM stdin;
 
 
 --
--- TOC entry 2429 (class 0 OID 0)
--- Dependencies: 200
 -- Name: parroquia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2338,8 +2262,6 @@ SELECT pg_catalog.setval('parroquia_id_seq', 1, false);
 
 
 --
--- TOC entry 2390 (class 0 OID 17019)
--- Dependencies: 201
 -- Data for Name: patologia; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2358,8 +2280,6 @@ COPY patologia (id, patologia) FROM stdin;
 
 
 --
--- TOC entry 2430 (class 0 OID 0)
--- Dependencies: 202
 -- Name: patologia_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2367,30 +2287,22 @@ SELECT pg_catalog.setval('patologia_id_seq', 1, false);
 
 
 --
--- TOC entry 2392 (class 0 OID 17025)
--- Dependencies: 203
 -- Data for Name: persona; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY persona (id, primer_apellido, segundo_apellido, primer_nombre, segundo_nombre, cedula, idnacionalidad, fecha_nacimiento, direccion, genero, telefono_1, telefono_2, cedula_ruta, carnet_ruta, idparroquia, idusuario) FROM stdin;
-5	contre	lope	alfre	luis	1304797	1	2012-03-01	xxxxxxx	f	11111111	1111111	tutut	ruta	79	\N
-11	aa	a	a	a	123123	1	2015-03-05	sfa	F	12312321	12312312	xxxxxxxx	xxxxxxxxxxx	640	\N
-12	aa	a	a	a	123123	1	2015-03-05	sfa	F	12312321	12312312	xxxxxxxx	xxxxxxxxxxx	640	\N
+COPY persona (id, primer_apellido, segundo_apellido, primer_nombre, segundo_nombre, cedula, idnacionalidad, fecha_nacimiento, direccion, genero, telefono_1, telefono_2, cedula_ruta, carnet_ruta, idparroquia, idusuario, updated_at) FROM stdin;
+10	a	lope	aaa	luis	18304797	1	2020-09-28	ddd	F	11111111	12312312	594971efb2959.png	594971efb2b4c.jpg	341	2	2017-06-20 15:05:19
 \.
 
 
 --
--- TOC entry 2431 (class 0 OID 0)
--- Dependencies: 204
 -- Name: persona_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('persona_id_seq', 14, true);
+SELECT pg_catalog.setval('persona_id_seq', 15, true);
 
 
 --
--- TOC entry 2407 (class 0 OID 17209)
--- Dependencies: 218
 -- Data for Name: reembolso_solicitud; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2399,8 +2311,6 @@ COPY reembolso_solicitud (id, idregistrosolicitud, idcentromedico, monto_solicit
 
 
 --
--- TOC entry 2432 (class 0 OID 0)
--- Dependencies: 215
 -- Name: reembolso_solicitud_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2408,8 +2318,6 @@ SELECT pg_catalog.setval('reembolso_solicitud_id_seq', 1, false);
 
 
 --
--- TOC entry 2394 (class 0 OID 17040)
--- Dependencies: 205
 -- Data for Name: registro_solicitud; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2418,8 +2326,6 @@ COPY registro_solicitud (id, idsolicitud, idpaciente, idpatologia, tratamiento, 
 
 
 --
--- TOC entry 2433 (class 0 OID 0)
--- Dependencies: 206
 -- Name: registro_solicitud_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2427,8 +2333,6 @@ SELECT pg_catalog.setval('registro_solicitud_id_seq', 1, false);
 
 
 --
--- TOC entry 2396 (class 0 OID 17050)
--- Dependencies: 207
 -- Data for Name: solicitud; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2437,8 +2341,6 @@ COPY solicitud (id, idtitular, fecha_solicitud, observacion, completado, idtipos
 
 
 --
--- TOC entry 2434 (class 0 OID 0)
--- Dependencies: 208
 -- Name: solicitud_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2446,21 +2348,16 @@ SELECT pg_catalog.setval('solicitud_id_seq', 1, false);
 
 
 --
--- TOC entry 2398 (class 0 OID 17058)
--- Dependencies: 209
 -- Data for Name: tiposolicitud; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY tiposolicitud (id, tiposolicitud) FROM stdin;
 1	Medicamento
-3	Carta aval
-2	Reembolso
+2	Medicamento
 \.
 
 
 --
--- TOC entry 2435 (class 0 OID 0)
--- Dependencies: 210
 -- Name: tiposolicitud_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2468,8 +2365,6 @@ SELECT pg_catalog.setval('tiposolicitud_id_seq', 2, true);
 
 
 --
--- TOC entry 2400 (class 0 OID 17064)
--- Dependencies: 211
 -- Data for Name: titular; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -2478,8 +2373,6 @@ COPY titular (id, idpersona) FROM stdin;
 
 
 --
--- TOC entry 2436 (class 0 OID 0)
--- Dependencies: 212
 -- Name: titular_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -2487,7 +2380,6 @@ SELECT pg_catalog.setval('titular_id_seq', 1, false);
 
 
 --
--- TOC entry 2232 (class 2606 OID 17206)
 -- Name: casos_asignado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2496,7 +2388,6 @@ ALTER TABLE ONLY casos_asignado
 
 
 --
--- TOC entry 2230 (class 2606 OID 17201)
 -- Name: centro_medico_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2505,7 +2396,6 @@ ALTER TABLE ONLY centro_medico
 
 
 --
--- TOC entry 2200 (class 2606 OID 17070)
 -- Name: estado_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2514,7 +2404,6 @@ ALTER TABLE ONLY estado
 
 
 --
--- TOC entry 2204 (class 2606 OID 17072)
 -- Name: fos_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2523,7 +2412,6 @@ ALTER TABLE ONLY fos_user
 
 
 --
--- TOC entry 2196 (class 2606 OID 17074)
 -- Name: idafiliado_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2532,7 +2420,6 @@ ALTER TABLE ONLY afiliado
 
 
 --
--- TOC entry 2198 (class 2606 OID 17076)
 -- Name: idauditoria_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2541,7 +2428,6 @@ ALTER TABLE ONLY auditoria
 
 
 --
--- TOC entry 2202 (class 2606 OID 17078)
 -- Name: idestatus_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2550,7 +2436,6 @@ ALTER TABLE ONLY estatus
 
 
 --
--- TOC entry 2212 (class 2606 OID 17080)
 -- Name: idparentesco_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2559,7 +2444,6 @@ ALTER TABLE ONLY parentesco
 
 
 --
--- TOC entry 2216 (class 2606 OID 17082)
 -- Name: idpatologia_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2568,7 +2452,6 @@ ALTER TABLE ONLY patologia
 
 
 --
--- TOC entry 2218 (class 2606 OID 17084)
 -- Name: idpersona_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2577,7 +2460,6 @@ ALTER TABLE ONLY persona
 
 
 --
--- TOC entry 2221 (class 2606 OID 17086)
 -- Name: idregistro_solicitud_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2586,7 +2468,6 @@ ALTER TABLE ONLY registro_solicitud
 
 
 --
--- TOC entry 2223 (class 2606 OID 17088)
 -- Name: idsolicitud_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2595,7 +2476,6 @@ ALTER TABLE ONLY solicitud
 
 
 --
--- TOC entry 2226 (class 2606 OID 17090)
 -- Name: idtiposolicitud_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2604,7 +2484,6 @@ ALTER TABLE ONLY tiposolicitud
 
 
 --
--- TOC entry 2228 (class 2606 OID 17092)
 -- Name: idtitular_pk; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2613,7 +2492,6 @@ ALTER TABLE ONLY titular
 
 
 --
--- TOC entry 2208 (class 2606 OID 17094)
 -- Name: municipio_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2622,7 +2500,6 @@ ALTER TABLE ONLY municipio
 
 
 --
--- TOC entry 2210 (class 2606 OID 17096)
 -- Name: nacionalidad_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2631,7 +2508,6 @@ ALTER TABLE ONLY nacionalidad
 
 
 --
--- TOC entry 2214 (class 2606 OID 17098)
 -- Name: parroquia_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2640,7 +2516,6 @@ ALTER TABLE ONLY parroquia
 
 
 --
--- TOC entry 2238 (class 2606 OID 17216)
 -- Name: reembolso_solicitud_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2649,7 +2524,6 @@ ALTER TABLE ONLY reembolso_solicitud
 
 
 --
--- TOC entry 2219 (class 1259 OID 17099)
 -- Name: idx_51e5b69bfd61e233; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2657,7 +2531,6 @@ CREATE INDEX idx_51e5b69bfd61e233 ON persona USING btree (idusuario);
 
 
 --
--- TOC entry 2233 (class 1259 OID 17207)
 -- Name: idx_59573d39e8c9d535; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2665,7 +2538,6 @@ CREATE INDEX idx_59573d39e8c9d535 ON casos_asignado USING btree (idsolicitud);
 
 
 --
--- TOC entry 2234 (class 1259 OID 17208)
 -- Name: idx_59573d39f62ac5f6; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2673,7 +2545,6 @@ CREATE INDEX idx_59573d39f62ac5f6 ON casos_asignado USING btree (idanalista);
 
 
 --
--- TOC entry 2235 (class 1259 OID 17218)
 -- Name: idx_6e879b1a37f801f0; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2681,7 +2552,6 @@ CREATE INDEX idx_6e879b1a37f801f0 ON reembolso_solicitud USING btree (idcentrome
 
 
 --
--- TOC entry 2236 (class 1259 OID 17217)
 -- Name: idx_6e879b1a5d8b930d; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2689,7 +2559,6 @@ CREATE INDEX idx_6e879b1a5d8b930d ON reembolso_solicitud USING btree (idregistro
 
 
 --
--- TOC entry 2224 (class 1259 OID 17244)
 -- Name: idx_96d27cc0174d74b2; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2697,7 +2566,6 @@ CREATE INDEX idx_96d27cc0174d74b2 ON solicitud USING btree (idtiposolicitud);
 
 
 --
--- TOC entry 2205 (class 1259 OID 17100)
 -- Name: uniq_957a647992fc23a8; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2705,7 +2573,6 @@ CREATE UNIQUE INDEX uniq_957a647992fc23a8 ON fos_user USING btree (username_cano
 
 
 --
--- TOC entry 2206 (class 1259 OID 17101)
 -- Name: uniq_957a6479a0d96fbf; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -2713,7 +2580,13 @@ CREATE UNIQUE INDEX uniq_957a6479a0d96fbf ON fos_user USING btree (email_canonic
 
 
 --
--- TOC entry 2244 (class 2606 OID 17102)
+-- Name: modificar_trigger_persona; Type: TRIGGER; Schema: public; Owner: postgres
+--
+
+CREATE TRIGGER modificar_trigger_persona AFTER INSERT ON persona FOR EACH ROW EXECUTE PROCEDURE insertar_trigger_persona();
+
+
+--
 -- Name: fk_51e5b69bfd61e233; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2722,7 +2595,6 @@ ALTER TABLE ONLY persona
 
 
 --
--- TOC entry 2254 (class 2606 OID 17219)
 -- Name: fk_59573d39e8c9d535; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2731,7 +2603,6 @@ ALTER TABLE ONLY casos_asignado
 
 
 --
--- TOC entry 2255 (class 2606 OID 17224)
 -- Name: fk_59573d39f62ac5f6; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2740,7 +2611,6 @@ ALTER TABLE ONLY casos_asignado
 
 
 --
--- TOC entry 2257 (class 2606 OID 17234)
 -- Name: fk_6e879b1a37f801f0; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2749,7 +2619,6 @@ ALTER TABLE ONLY reembolso_solicitud
 
 
 --
--- TOC entry 2256 (class 2606 OID 17229)
 -- Name: fk_6e879b1a5d8b930d; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2758,7 +2627,6 @@ ALTER TABLE ONLY reembolso_solicitud
 
 
 --
--- TOC entry 2252 (class 2606 OID 17239)
 -- Name: fk_96d27cc0174d74b2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2767,7 +2635,6 @@ ALTER TABLE ONLY solicitud
 
 
 --
--- TOC entry 2242 (class 2606 OID 17107)
 -- Name: id_estado_fk_estado; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2776,7 +2643,6 @@ ALTER TABLE ONLY municipio
 
 
 --
--- TOC entry 2247 (class 2606 OID 17112)
 -- Name: id_estatus_fk_estatus; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2785,7 +2651,6 @@ ALTER TABLE ONLY registro_solicitud
 
 
 --
--- TOC entry 2243 (class 2606 OID 17117)
 -- Name: id_municipio_fk_municipio; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2794,7 +2659,6 @@ ALTER TABLE ONLY parroquia
 
 
 --
--- TOC entry 2245 (class 2606 OID 17122)
 -- Name: id_nacionalidad_fk_nacionalidad; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2803,7 +2667,6 @@ ALTER TABLE ONLY persona
 
 
 --
--- TOC entry 2248 (class 2606 OID 17127)
 -- Name: id_paciente_fk_personas; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2812,7 +2675,6 @@ ALTER TABLE ONLY registro_solicitud
 
 
 --
--- TOC entry 2239 (class 2606 OID 17132)
 -- Name: id_parentesco_fk_parentesco; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2821,7 +2683,6 @@ ALTER TABLE ONLY afiliado
 
 
 --
--- TOC entry 2246 (class 2606 OID 17137)
 -- Name: id_parroquia_fk_parroquia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2830,7 +2691,6 @@ ALTER TABLE ONLY persona
 
 
 --
--- TOC entry 2249 (class 2606 OID 17142)
 -- Name: id_patologia_fk_patologia; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2839,7 +2699,6 @@ ALTER TABLE ONLY registro_solicitud
 
 
 --
--- TOC entry 2253 (class 2606 OID 17147)
 -- Name: id_persona_fk_persona; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2848,7 +2707,6 @@ ALTER TABLE ONLY titular
 
 
 --
--- TOC entry 2240 (class 2606 OID 17152)
 -- Name: id_persona_fk_persona; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2857,7 +2715,6 @@ ALTER TABLE ONLY afiliado
 
 
 --
--- TOC entry 2250 (class 2606 OID 17157)
 -- Name: id_solicitud_fk_solicitud; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2866,7 +2723,6 @@ ALTER TABLE ONLY registro_solicitud
 
 
 --
--- TOC entry 2241 (class 2606 OID 17167)
 -- Name: id_titular_fk_titular; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2875,7 +2731,6 @@ ALTER TABLE ONLY afiliado
 
 
 --
--- TOC entry 2251 (class 2606 OID 17172)
 -- Name: id_titular_fk_titular; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -2884,8 +2739,6 @@ ALTER TABLE ONLY solicitud
 
 
 --
--- TOC entry 2414 (class 0 OID 0)
--- Dependencies: 9
 -- Name: public; Type: ACL; Schema: -; Owner: postgres
 --
 
@@ -2894,8 +2747,6 @@ REVOKE ALL ON SCHEMA public FROM postgres;
 GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
-
--- Completed on 2017-06-19 09:52:24 VET
 
 --
 -- PostgreSQL database dump complete

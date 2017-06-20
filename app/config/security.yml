@@ -45,7 +45,9 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(css|js), roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(_wdt|_profiler), roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        #- { path: ^/persona/crearpersona/, roles: [ROLE_TEMPORAL] }
+        - { path: ^/municipio, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/parroquia, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/persona/crearpersona/, roles: [ROLE_TEMPORAL] }
         - { path: ^/, roles: [ROLE_SUPER_ADMIN, ROLE_ADMIN_OPSU, ROLE_AFILIADO, ROLE_TEMPORAL] }
         #- { path: ^/user/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
