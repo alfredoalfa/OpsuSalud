@@ -66,3 +66,17 @@ execute procedure insertar_trigger_persona();
 
 
 php app/console doctrine:schema:update --dump-sql
+
+*************git***************
+
+Si quieres mantener los cambios:
+
+git reset [--mixed] HEAD~1
+
+Si además no quieres cargarte el commit (sólo mover el head al anterior):
+
+git reset --soft HEAD~1
+
+Y si no quieres mantenerlos (y volver al estado del commit anterior, en la práctica, destruir el último commit completamente como si nunca hubiera existido):
+
+git reset --hard HEAD~1
