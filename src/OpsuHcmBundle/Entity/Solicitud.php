@@ -188,4 +188,5 @@ class Solicitud
     {
         return $this->idtiposolicitud;
     }
+    
 }

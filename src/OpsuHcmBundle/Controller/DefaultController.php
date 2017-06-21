@@ -28,6 +28,8 @@ class DefaultController extends Controller
                 return $this->redirectToRoute('crearPersona');
                 break;
             default:
+
+            
                return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
                     'user' => $this->getUser()));
                 break;   

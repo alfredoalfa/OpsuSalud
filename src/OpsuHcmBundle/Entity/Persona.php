@@ -517,7 +517,7 @@ class Persona
         return $this->idparroquia;
     }
     
-    public function __toString(){
+        public function __toString(){
         return $this->idparroquia;
     }
 

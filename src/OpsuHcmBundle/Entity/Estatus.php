@@ -63,4 +63,8 @@ class Estatus
     {
         return $this->estatus;
     }
+
+                public function __toString(){
+        return $this->estatus;
+    }
 }

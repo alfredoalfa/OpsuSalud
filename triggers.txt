@@ -98,3 +98,8 @@ psql -U user db_name < /directory/archive.sql
 
 put the user password and press enter.
 
+
+**************insert con valor sequencial************
+INSERT INTO public.titular VALUES (nextval('titular_id_seq'), 10);
+
+

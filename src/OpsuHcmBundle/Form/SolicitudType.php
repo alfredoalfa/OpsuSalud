@@ -13,11 +13,14 @@ class SolicitudType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('fechaSolicitud')
-        ->add('observacion')
-        ->add('completado')
-        ->add('idtitular')
-        ->add('idtiposolicitud');
+        $builder
+        ->add('idtitular', 'entity', array(
+             'class' => 'OpsuHcmBundle:Titular',
+              'empty_value' => 'Seleccione...'))
+        ->add('idtiposolicitud', 'entity', array(
+             'class' => 'OpsuHcmBundle:Solicitud',
+              'empty_value' => 'Seleccione...'))
+        ->add('observacion');
     }
     
     /**
