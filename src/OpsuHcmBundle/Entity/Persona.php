@@ -96,16 +96,6 @@ class Persona
     private $telefono2;
 
     /**
-     * @var \FosUser
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idusuario", referencedColumnName="id")
-     * })
-     */
-    private $idusuario;
-
-    /**
      * @var \Nacionalidad
      *
      * @ORM\ManyToOne(targetEntity="Nacionalidad")
@@ -446,29 +436,6 @@ class Persona
     public function getCarnetRuta()
     {
         return $this->carnetRuta;
-    }
-
-    /**
-     * Set idusuario
-     *
-     * @param \AppBundle\Entity\User $idusuario
-     * @return Persona
-     */
-    public function setIdUsuario(\AppBundle\Entity\User $idusuario = null)
-    {    
-        $this->idusuario = $idusuario;
-
-        return $this;
-    }
-
-/**
-     * Get idusuario
-     *
-     * @return \OpsuHcmBundle\Entity\User
-     */
-    public function getIdusuario()
-    {
-        return $this->idusuario;
     }
 
     /**

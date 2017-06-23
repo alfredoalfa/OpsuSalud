@@ -55,16 +55,16 @@ class PersonaType extends AbstractType
         ->add('carnetFile', FileType::class, array('label' => 'Copia del Carnet (JPG archivo)'))
         ->add('idnacionalidad')
 
-         ->add('idusuario', EntityType::class, array(
-                'class' => 'AppBundle:User',
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('u')
-                        ->orderBy('u.username', 'ASC')
-                        ->where('u.id = :idusuario')
-                        ->setParameter('idusuario',$this->securityContext->getToken()->getUser()); 
-                },
-                'label'=>'Titular',
-            ))
+         // ->add('idusuario', EntityType::class, array(
+         //        'class' => 'AppBundle:User',
+         //        'query_builder' => function (EntityRepository $er) {
+         //            return $er->createQueryBuilder('u')
+         //                ->orderBy('u.username', 'ASC')
+         //                ->where('u.id = :idusuario')
+         //                ->setParameter('idusuario',$this->securityContext->getToken()->getUser()); 
+         //        },
+         //        'label'=>'Titular',
+         //    ))
 
         ->add('idEstado', 'entity', array(
             'class' => 'OpsuHcmBundle:Estado',

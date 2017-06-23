@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Solicitud
  *
- * @ORM\Table(name="solicitud", indexes={@ORM\Index(name="IDX_96D27CC0A62749A9", columns={"idtitular"})})
+ * @ORM\Table(name="solicitud")
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Solicitud")
  */
 class Solicitud
@@ -44,9 +44,9 @@ class Solicitud
     private $completado;
 
     /**
-     * @var \Titular
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Titular")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idtitular", referencedColumnName="id")
      * })

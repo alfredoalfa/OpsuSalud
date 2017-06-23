@@ -5,24 +5,24 @@ namespace OpsuHcmBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Titular
+ * PersonaUser
  *
- * @ORM\Table(name="titular", indexes={@ORM\Index(name="IDX_79231BC78EE1E4F5", columns={"idpersona"})})
- * @ORM\Entity
+ * @ORM\Table(name="persona_user")
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\PersonaUserRepository")
  */
-class Titular
+class PersonaUser
 {
-    /**
+   /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
-     * @ORM\SequenceGenerator(sequenceName="titular_id_seq", allocationSize=1, initialValue=1)
+     * @ORM\SequenceGenerator(sequenceName="persona_user_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
-    /**
+     /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -32,17 +32,16 @@ class Titular
      */
     private $idpersona;
 
-
-
     /**
-     * Get id
+     * @var \FosUser
      *
-     * @return integer 
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idusuario", referencedColumnName="id")
+     * })
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $idusuario;
+
 
     /**
      * Set idpersona
@@ -66,4 +65,29 @@ class Titular
     {
         return $this->idpersona;
     }
+
+
+    /**
+     * Set idusuario
+     *
+     * @param \AppBundle\Entity\User $idusuario
+     * @return Persona
+     */
+    public function setIdUsuario(\AppBundle\Entity\User $idusuario = null)
+    {    
+        $this->idusuario = $idusuario;
+
+        return $this;
+    }
+
+    /**
+     * Get idusuario
+     *
+     * @return \OpsuHcmBundle\Entity\User
+     */
+    public function getIdusuario()
+    {
+        return $this->idusuario;
+    }
+
 }

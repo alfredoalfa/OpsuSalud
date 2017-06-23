@@ -7,8 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Afiliado
  *
- * @ORM\Table(name="afiliado", indexes={@ORM\Index(name="IDX_319B09B953B72D2C", columns={"idparentesco"}), @ORM\Index(name="IDX_319B09B98EE1E4F5", columns={"idpersona"}), @ORM\Index(name="IDX_319B09B9A62749A9", columns={"idtitular"})})
- * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Afiliado")
+ * @ORM\Table(name="afiliado")
  */
 class Afiliado
 {
@@ -37,10 +36,10 @@ class Afiliado
      *
      * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idpersona", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="idafiliado", referencedColumnName="id")
      * })
      */
-    private $idpersona;
+    private $idafiliado;
 
     /**
      * @var \Titular
@@ -88,26 +87,26 @@ class Afiliado
     }
 
     /**
-     * Set idpersona
+     * Set idafiliado
      *
-     * @param \OpsuHcmBundle\Entity\Persona $idpersona
+     * @param \OpsuHcmBundle\Entity\Persona $idafiliado
      * @return Afiliado
      */
-    public function setIdpersona(\OpsuHcmBundle\Entity\Persona $idpersona = null)
+    public function setIdafiliado(\OpsuHcmBundle\Entity\Persona $idafiliado = null)
     {
-        $this->idpersona = $idpersona;
+        $this->idafiliado = $idafiliado;
 
         return $this;
     }
 
     /**
-     * Get idpersona
+     * Get idafiliado
      *
      * @return \OpsuHcmBundle\Entity\Persona 
      */
-    public function getIdpersona()
+    public function getIdafiliado()
     {
-        return $this->idpersona;
+        return $this->idafiliado;
     }
 
     /**

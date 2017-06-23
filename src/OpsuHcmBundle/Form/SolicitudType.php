@@ -14,9 +14,7 @@ class SolicitudType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-        ->add('idtitular', 'entity', array(
-             'class' => 'OpsuHcmBundle:Titular',
-              'empty_value' => 'Seleccione...'))
+        ->add('idtitular')
         ->add('idtiposolicitud', 'entity', array(
              'class' => 'OpsuHcmBundle:Solicitud',
               'empty_value' => 'Seleccione...'))

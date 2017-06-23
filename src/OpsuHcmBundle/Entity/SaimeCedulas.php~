@@ -1,0 +1,136 @@
+<?php
+
+namespace OpsuHcmBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * SaimeCedulas
+ *
+ * @ORM\Table(name="saime_cedulas")
+ * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\SaimeCedulasRepository")
+ */
+class SaimeCedulas
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="saime_cedulas_id_seq", allocationSize=1, initialValue=1)
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="letra", type="string", length=255, nullable=true)
+     */
+    private $letra;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="numcedula", type="integer", nullable=true)
+     */
+    private $numcedula;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="paisorigen", type="string", length=1, nullable=true)
+     */
+    private $paisorigen;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nacionalidad", type="string", length=255, nullable=true)
+     */
+    private $nacionalidad;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="primernombre", type="string", length=255, nullable=true)
+     */
+    private $primernombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="segundonombre", type="string", length=255, nullable=true)
+     */
+    private $segundonombre;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="primerapellido", type="string", length=255, nullable=true)
+     */
+    private $primerapellido;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="segundoapellido", type="string", length=255, nullable=true)
+     */
+    private $segundoapellido;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fechanac", type="string", length=255, nullable=true)
+     */
+    private $fechanac;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fechacedorg", type="string", length=1, nullable=true)
+     */
+    private $fechacedorg;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codobjecion", type="string", length=1, nullable=true)
+     */
+    private $codobjecion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codoficina", type="string", length=1, nullable=true)
+     */
+    private $codoficina;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="codestadocivil", type="string", length=255, nullable=true)
+     */
+    private $codestadocivil;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="naturalizado", type="string", length=255, nullable=true)
+     */
+    private $naturalizado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="sexo", type="string", length=255, nullable=true)
+     */
+    private $sexo;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fecha_creacion", type="datetime", nullable=false)
+     */
+    private $fechaCreacion;
+}
