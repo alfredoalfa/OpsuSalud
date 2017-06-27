@@ -170,7 +170,7 @@ class PersonaController extends Controller
 
                     $personaUser->setIdpersona($idPersona);
                     $personaUser->setIdUsuario($idUser);
-                    $em->persist($personaUser);
+                    $em->persist($personaUser); 
                     $em->flush();
 
                    return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));      

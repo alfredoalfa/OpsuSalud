@@ -40,7 +40,7 @@ class DefaultController extends Controller
         
         $idPersona = $em->getRepository('OpsuHcmBundle:PersonaUser')->findBy(array('idusuario'=>$userId));
         print_r(dump($userId));
-        print_r(dump($idPersona));
+        print_r(dump($idPersona)); 
             print_r(dump($idPersona[0]->getIdpersona()->getId()));
 
         $personas = $em->getRepository('OpsuHcmBundle:Persona')->findBy(array('id'=>$idPersona[0]->getIdpersona()->getId()));

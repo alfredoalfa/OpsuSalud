@@ -152,7 +152,7 @@ class SolicitudController extends Controller
             $solicitud->setFechaSolicitud(new \DateTime('now'));
 
             print_r(dump($solicitud));
-            die();      
+            die();       
             //$em->flush();
 
             return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));

@@ -18,7 +18,7 @@ class SolicitudType extends AbstractType
             'class' => 'OpsuHcmBundle:Tiposolicitud',
             'label'=>'Tipo de Solicitud',
             'empty_value' => 'Seleccione...'
-        ))
+        )) 
         ->add('observacion');
     }
     
