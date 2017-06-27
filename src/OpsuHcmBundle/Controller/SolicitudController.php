@@ -5,7 +5,8 @@ namespace OpsuHcmBundle\Controller;
 use OpsuHcmBundle\Entity\Solicitud;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Solicitud controller.
@@ -132,5 +133,30 @@ class SolicitudController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/generarSolicitud/", name="generarSolicitud")
+     * @Method("POST")
+     */
+    public function generarSolicitudAction(Request $request)
+    {
+        $solicitud = new Solicitud();
+        $form = $this->createForm('OpsuHcmBundle\Form\SolicitudType', $solicitud);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($solicitud);
+            $solicitud->setFechaSolicitud(new \DateTime('now'));
+
+            print_r(dump($solicitud));
+            die();      
+            //$em->flush();
+
+            return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));
+        }
+            return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));
     }
 }

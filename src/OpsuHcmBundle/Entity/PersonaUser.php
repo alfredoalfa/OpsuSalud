@@ -83,7 +83,7 @@ class PersonaUser
     /**
      * Get idusuario
      *
-     * @return \OpsuHcmBundle\Entity\User
+     * @return \AppBundle\Entity\User
      */
     public function getIdusuario()
     {

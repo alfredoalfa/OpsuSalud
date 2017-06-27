@@ -59,9 +59,41 @@ return null;
 end;
 $insertar$ language plpgsql;
 
-create trigger modificar_trigger_persona after insert
+create trigger insertar_trigger_persona after insert
 on persona for each row
 execute procedure insertar_trigger_persona();
+
+
+
+
+
+create or replace function insertar_trigger_persona_user() returns trigger as $insertar$
+DECLARE
+	U_id integer;
+   M_rol text;
+BEGIN
+		-- selecciona el ultimo insertado persona_user y busca su rol
+
+	    U_id=(SELECT idusuario FROM persona_user ORDER BY id DESC LIMIT 1);
+
+	    M_rol=(SELECT roles FROM fos_user WHERE id = U_id);
+
+    IF (M_rol = 'a:1:{i:0;s:13:"ROLE_TEMPORAL";}') 
+    THEN
+      UPDATE public.fos_user SET roles = 'a:1:{i:0;s:13:"ROLE_AFILIADO";}';
+	  RETURN null;
+    ELSE 
+      RETURN null;
+    END IF;
+ end;
+$insertar$ language plpgsql;
+
+
+CREATE TRIGGER insertar_trigger_persona_user
+  AFTER INSERT
+  ON public.persona_user
+  FOR EACH ROW
+  EXECUTE PROCEDURE public.insertar_trigger_persona_user();
 
 
 

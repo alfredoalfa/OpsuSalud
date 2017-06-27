@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use OpsuHcmBundle\Entity\PersonaUser;
+use AppBundle\Entity\User;
 
 /**
  * Persona controller.
@@ -146,16 +148,33 @@ class PersonaController extends Controller
         $persona = new Persona();
         $form = $this->createForm($this->get('app.form.type.persona'), $persona);
         //$form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($persona);
+            $em->flush();
+
+             $user = $this->getUser();
+             $roles = $user->getRoles();
+    
+             if ($roles[0]=="ROLE_TEMPORAL") {
             
-             print_r(dump($persona));
-             die();
-            //$em->flush();
+                    $personaUser = new PersonaUser();
+                    $User = new User();
+
+                    $idPersona = $this->getDoctrine()->getRepository('OpsuHcmBundle:Persona')->find($persona->getId());
+                    $idUser = $this->getDoctrine()->getRepository('AppBundle:User')->find($user->getId());
+
+                    $personaUser->setIdpersona($idPersona);
+                    $personaUser->setIdUsuario($idUser);
+                    $em->persist($personaUser);
+                    $em->flush();
+
+                   return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));      
+             }
 
             return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));
         }
@@ -165,6 +184,4 @@ class PersonaController extends Controller
             'form' => $form->createView(),
         ));
     }
-
-
 }

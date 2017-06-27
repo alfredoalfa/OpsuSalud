@@ -50,7 +50,6 @@ class PersonaType extends AbstractType
                 'required'    => true,
             ))
         ->add('telefono1')
-        ->add('telefono2')
         ->add('cedulaFile', FileType::class, array('label' => 'Copia de la ceula (JPG archivo)'))
         ->add('carnetFile', FileType::class, array('label' => 'Copia del Carnet (JPG archivo)'))
         ->add('idnacionalidad')

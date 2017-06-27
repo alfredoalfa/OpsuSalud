@@ -3,6 +3,9 @@
 namespace OpsuHcmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -12,6 +15,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  *
  * @ORM\Table(name="persona", indexes={@ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Persona")
+ * @DoctrineAssert\UniqueEntity(fields = {"cedula"})
  */
 class Persona
 {
@@ -28,7 +32,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="primer_apellido", type="string", length=50, nullable=true)
+     * @ORM\Column(name="primer_apellido", type="string", length=50, nullable=false)
      */
     private $primerApellido;
 
@@ -42,7 +46,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="primer_nombre", type="string", length=50, nullable=true)
+     * @ORM\Column(name="primer_nombre", type="string", length=50, nullable=false)
      */
     private $primerNombre;
 
@@ -141,7 +145,7 @@ class Persona
      /**
      * @var string $carnetRuta
      *
-     * @ORM\Column(name="carnet_ruta", type="string", length=255)
+     * @ORM\Column(name="carnet_ruta", type="string", length=255, nullable=true)
      */
     private $carnetRuta;
 
@@ -485,7 +489,7 @@ class Persona
     }
     
         public function __toString(){
-        return $this->idparroquia;
+        return $this->primerApellido.' '.$this->primerNombre;
     }
 
     /**

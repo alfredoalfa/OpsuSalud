@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use OpsuHcmBundle\Entity\Estado;
 use OpsuHcmBundle\Entity\Municipio;
 use OpsuHcmBundle\Entity\Parroquia;
+use OpsuHcmBundle\Entity\Solicitud;
+use OpsuHcmBundle\Entity\Persona;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
 
@@ -22,6 +25,7 @@ class DefaultController extends Controller
     {
         $user = $this->getUser();
         $roles = $user->getRoles();
+        $userId = $user->getId();
     
         switch ($roles[0]) {
             case "ROLE_TEMPORAL":
@@ -30,8 +34,30 @@ class DefaultController extends Controller
             default:
 
             
+            $solicitud = new Solicitud();
+
+        $em = $this->getDoctrine()->getManager();
+        
+        $idPersona = $em->getRepository('OpsuHcmBundle:PersonaUser')->findBy(array('idusuario'=>$userId));
+        print_r(dump($userId));
+        print_r(dump($idPersona));
+            print_r(dump($idPersona[0]->getIdpersona()->getId()));
+
+        $personas = $em->getRepository('OpsuHcmBundle:Persona')->findBy(array('id'=>$idPersona[0]->getIdpersona()->getId()));
+             
+             $form = $this->createForm('OpsuHcmBundle\Form\SolicitudType', $solicitud, array(
+            'action' => $this->generateUrl('generarSolicitud'),
+            'method' => 'POST',
+        ));
+             $form ->add('idtitular', EntityType::class, array(
+                        'class' => 'OpsuHcmBundle:Persona',
+                        'choices'  => array($personas[0]),
+                            'label'=>'Titular',
+                            ));
+          
                return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
-                    'user' => $this->getUser()));
+                    'solicitud' => $solicitud,
+                    'form'   => $form->createView()));
                 break;   
                 }     
     }

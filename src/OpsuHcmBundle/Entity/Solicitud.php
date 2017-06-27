@@ -149,7 +149,7 @@ class Solicitud
      * @param \OpsuHcmBundle\Entity\Titular $idtitular
      * @return Solicitud
      */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Titular $idtitular = null)
+    public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)
     {
         $this->idtitular = $idtitular;
 
