@@ -155,8 +155,16 @@ class SolicitudController extends Controller
             die();       
             //$em->flush();
 
+            $request->getSession()->getFlashBag()->add(
+            'success',
+            'Se ha registrado la salida del visitante '.$datosPersona[0]->getPrimerNombre().' '.$datosPersona[0]->getPrimerApellido().' '.'con el numero de cédula '.$datosPersona[0]->getCedula());
             return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));
         }
-            return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));
+
+            $request->getSession()->getFlashBag()->add(
+            'danger',
+            'No se ha resgistrado de forma correcta la solicitud debe intentarlo de nuevo.');
+
+            return $this->redirectToRoute('homepage');
     }
 }
