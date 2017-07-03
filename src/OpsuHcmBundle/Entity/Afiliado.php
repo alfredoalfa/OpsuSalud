@@ -22,16 +22,6 @@ class Afiliado
     private $id;
 
     /**
-     * @var \Parentesco
-     *
-     * @ORM\ManyToOne(targetEntity="Parentesco")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idparentesco", referencedColumnName="id")
-     * })
-     */
-    private $idparentesco;
-
-    /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -42,9 +32,9 @@ class Afiliado
     private $idafiliado;
 
     /**
-     * @var \Titular
+     * @var \Persona
      *
-     * @ORM\ManyToOne(targetEntity="Titular")
+     * @ORM\ManyToOne(targetEntity="Persona")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="idtitular", referencedColumnName="id")
      * })
@@ -61,29 +51,6 @@ class Afiliado
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set idparentesco
-     *
-     * @param \OpsuHcmBundle\Entity\Parentesco $idparentesco
-     * @return Afiliado
-     */
-    public function setIdparentesco(\OpsuHcmBundle\Entity\Parentesco $idparentesco = null)
-    {
-        $this->idparentesco = $idparentesco;
-
-        return $this;
-    }
-
-    /**
-     * Get idparentesco
-     *
-     * @return \OpsuHcmBundle\Entity\Parentesco 
-     */
-    public function getIdparentesco()
-    {
-        return $this->idparentesco;
     }
 
     /**
@@ -112,10 +79,10 @@ class Afiliado
     /**
      * Set idtitular
      *
-     * @param \OpsuHcmBundle\Entity\Titular $idtitular
+     * @param \OpsuHcmBundle\Entity\Person $idtitular
      * @return Afiliado
      */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Titular $idtitular = null)
+    public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)
     {
         $this->idtitular = $idtitular;
 
@@ -125,7 +92,7 @@ class Afiliado
     /**
      * Get idtitular
      *
-     * @return \OpsuHcmBundle\Entity\Titular 
+     * @return \OpsuHcmBundle\Entity\Persona 
      */
     public function getIdtitular()
     {

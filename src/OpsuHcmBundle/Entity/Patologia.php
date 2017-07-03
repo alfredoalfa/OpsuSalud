@@ -63,4 +63,7 @@ class Patologia
     {
         return $this->patologia;
     }
+             public function __toString(){
+        return $this->patologia;
+    }
 }

@@ -69,4 +69,119 @@ class ReembolsoSolicitud
     {
         return $this->id;
     }
+
+    /**
+     * Set montoSolicitado
+     *
+     * @param string $montoSolicitado
+     * @return ReembolsoSolicitud
+     */
+    public function setMontoSolicitado($montoSolicitado)
+    {
+        $this->montoSolicitado = $montoSolicitado;
+
+        return $this;
+    }
+
+    /**
+     * Get montoSolicitado
+     *
+     * @return string 
+     */
+    public function getMontoSolicitado()
+    {
+        return $this->montoSolicitado;
+    }
+
+    /**
+     * Set presupuestoReciboRuta
+     *
+     * @param string $presupuestoReciboRuta
+     * @return ReembolsoSolicitud
+     */
+    public function setPresupuestoReciboRuta($presupuestoReciboRuta)
+    {
+        $this->presupuestoReciboRuta = $presupuestoReciboRuta;
+
+        return $this;
+    }
+
+    /**
+     * Get presupuestoReciboRuta
+     *
+     * @return string 
+     */
+    public function getPresupuestoReciboRuta()
+    {
+        return $this->presupuestoReciboRuta;
+    }
+
+    /**
+     * Set montoAprobado
+     *
+     * @param string $montoAprobado
+     * @return ReembolsoSolicitud
+     */
+    public function setMontoAprobado($montoAprobado)
+    {
+        $this->montoAprobado = $montoAprobado;
+
+        return $this;
+    }
+
+    /**
+     * Get montoAprobado
+     *
+     * @return string 
+     */
+    public function getMontoAprobado()
+    {
+        return $this->montoAprobado;
+    }
+
+    /**
+     * Set idregistroSolicitud
+     *
+     * @param \OpsuHcmBundle\Entity\RegistroSolicitud $idregistroSolicitud
+     * @return ReembolsoSolicitud
+     */
+    public function setIdregistroSolicitud(\OpsuHcmBundle\Entity\RegistroSolicitud $idregistroSolicitud = null)
+    {
+        $this->idregistroSolicitud = $idregistroSolicitud;
+
+        return $this;
+    }
+
+    /**
+     * Get idregistroSolicitud
+     *
+     * @return \OpsuHcmBundle\Entity\RegistroSolicitud 
+     */
+    public function getIdregistroSolicitud()
+    {
+        return $this->idregistroSolicitud;
+    }
+
+    /**
+     * Set idcentroMedico
+     *
+     * @param \OpsuHcmBundle\Entity\CentroMedico $idcentroMedico
+     * @return ReembolsoSolicitud
+     */
+    public function setIdcentroMedico(\OpsuHcmBundle\Entity\CentroMedico $idcentroMedico = null)
+    {
+        $this->idcentroMedico = $idcentroMedico;
+
+        return $this;
+    }
+
+    /**
+     * Get idcentroMedico
+     *
+     * @return \OpsuHcmBundle\Entity\CentroMedico 
+     */
+    public function getIdcentroMedico()
+    {
+        return $this->idcentroMedico;
+    }
 }

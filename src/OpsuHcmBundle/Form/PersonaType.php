@@ -53,6 +53,8 @@ class PersonaType extends AbstractType
         ->add('cedulaFile', FileType::class, array('label' => 'Copia de la ceula (JPG archivo)'))
         ->add('carnetFile', FileType::class, array('label' => 'Copia del Carnet (JPG archivo)'))
         ->add('idnacionalidad')
+        ->add('idparentesco')
+        
 
          // ->add('idusuario', EntityType::class, array(
          //        'class' => 'AppBundle:User',

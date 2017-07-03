@@ -187,6 +187,5 @@ class Solicitud
     public function getIdtiposolicitud()
     {
         return $this->idtiposolicitud;
-    }
-    
+    }  
 }

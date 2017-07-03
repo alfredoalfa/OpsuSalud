@@ -40,4 +40,9 @@ class Persona extends EntityRepository
   			return $entities->getArrayResult();
 	}
 
+    public function listaPacientes($idUser)
+    {
+        
+    }
+
 }

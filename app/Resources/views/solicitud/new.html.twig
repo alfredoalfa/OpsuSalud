@@ -1,16 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'menu.html.twig' %}
 
-{% block body %}
-    <h1>Solicitud creation</h1>
+{% block content -%}
+<div class="col-md-12">
+<h3 style="color:#3371B5">Registro Solicitud</h3>
+    <h4>Por favor llene los campos solicitados a continuación</h4>
 
+ <div class="col-md-6 col-md-offset-3">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Títular {{titular}}</h3>
+        </div>
+
+        <div class="panel-body"><!--contenido panel>-->
+           <div class="row">
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
+    {{ form_errors(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('solicitud_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    <div class="col-md-8 col-md-offset-2">
+        {{ form_row(form.idtiposolicitud) }}    
+    </div>
+<div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        {{ form_row(form.observacion) }}
+    </div>
+    </div>
+
+
+    <div class="col-md-12">
+        <input type="submit" value="Guardar" class="btn btn-primary center-block"/>
+        {{ form_end(form) }} 
+    </div>
+
+        </div> <!--/row-->
+      </div> <!--/cierra panel-->
+    </div><!--/cierra panel primary-->
+</div><!-- /contenido  formularo-->
 {% endblock %}

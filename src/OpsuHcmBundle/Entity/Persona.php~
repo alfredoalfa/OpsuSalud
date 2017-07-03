@@ -3,12 +3,19 @@
 namespace OpsuHcmBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Component\Validator\ExecutionContext;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Persona
+ * @Vich\Uploadable
  *
  * @ORM\Table(name="persona", indexes={@ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Persona")
+ * @DoctrineAssert\UniqueEntity(fields = {"cedula"})
  */
 class Persona
 {
@@ -25,7 +32,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="primer_apellido", type="string", length=50, nullable=true)
+     * @ORM\Column(name="primer_apellido", type="string", length=50, nullable=false)
      */
     private $primerApellido;
 
@@ -39,7 +46,7 @@ class Persona
     /**
      * @var string
      *
-     * @ORM\Column(name="primer_nombre", type="string", length=50, nullable=true)
+     * @ORM\Column(name="primer_nombre", type="string", length=50, nullable=false)
      */
     private $primerNombre;
 
@@ -93,30 +100,6 @@ class Persona
     private $telefono2;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="cedula_ruta", type="string", length=255, nullable=false)
-     */
-    private $cedulaRuta;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="carnet_ruta", type="string", length=255, nullable=false)
-     */
-    private $carnetRuta;
-
-    /**
-     * @var \FosUser
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idusuario", referencedColumnName="id")
-     * })
-     */
-    private $idusuario;
-
-    /**
      * @var \Nacionalidad
      *
      * @ORM\ManyToOne(targetEntity="Nacionalidad")
@@ -136,7 +119,52 @@ class Persona
      */
     private $idparroquia;
 
+     /**
+     * 
+     * @Vich\UploadableField(mapping="cedula_doc", fileNameProperty="cedulaRuta")
+     * 
+     * @var File $cedulaFile
+     */
+    private $cedulaFile;
 
+    /**
+     * @var string $cedulaRuta
+     *
+     * @ORM\Column(name="cedula_ruta", type="string", length=255)
+     */
+    private $cedulaRuta;
+
+     /**
+     * 
+     * @Vich\UploadableField(mapping="carnet_doc", fileNameProperty="carnetRuta")
+     * 
+     * @var File $carnetFile
+     */
+    private $carnetFile;
+
+     /**
+     * @var string $carnetRuta
+     *
+     * @ORM\Column(name="carnet_ruta", type="string", length=255, nullable=true)
+     */
+    private $carnetRuta;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \Parentesco
+     *
+     * @ORM\ManyToOne(targetEntity="Parentesco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idparentesco", referencedColumnName="id")
+     * })
+     */
+    private $idparentesco;
 
     /**
      * Get id
@@ -425,29 +453,6 @@ class Persona
     }
 
     /**
-     * Set idusuario
-     *
-     * @param integer $idusuario
-     * @return Persona
-     */
-    public function setIdUsuario(\AppBundle\Entity\User $idUsuario = null)
-    {
-        $this->idusuario = $idusuario;
-
-        return $this;
-    }
-
-/**
-     * Get idusuario
-     *
-     * @return \OpsuHcmBundle\Entity\User
-     */
-    public function getIdusuario()
-    {
-        return $this->idusuario;
-    }
-
-    /**
      * Set idnacionalidad
      *
      * @param \OpsuHcmBundle\Entity\Nacionalidad $idnacionalidad
@@ -493,7 +498,70 @@ class Persona
         return $this->idparroquia;
     }
     
-    public function __toString(){
-        return $this->idparroquia;
+        public function __toString(){
+        return $this->primerApellido.' '.$this->primerNombre;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $cedulaFile
+     */
+    public function setCedulaFile(File $cedulaFile = null)
+    {
+        $this->cedulaFile = $cedulaFile;
+
+        if ($cedulaFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getCedulaFile()
+    {
+        return $this->cedulaFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile $carnetFile
+     */
+    public function setCarnetFile(File $carnetFile = null)
+    {
+        $this->carnetFile = $carnetFile;
+
+        if ($carnetFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getCarnetFile()
+    {
+        return $this->carnetFile;
+    }
+
+     /**
+     * Set idparentesco
+     *
+     * @param \OpsuHcmBundle\Entity\Parentesco $idparentesco
+     * @return Afiliado
+     */
+    public function setIdparentesco(\OpsuHcmBundle\Entity\Parentesco $idparentesco = null)
+    {
+        $this->idparentesco = $idparentesco;
+
+        return $this;
+    }
+
+    /**
+     * Get idparentesco
+     *
+     * @return \OpsuHcmBundle\Entity\Parentesco 
+     */
+    public function getIdparentesco()
+    {
+        return $this->idparentesco;
     }
 }

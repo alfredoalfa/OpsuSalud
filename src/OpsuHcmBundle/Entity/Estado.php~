@@ -94,7 +94,7 @@ class Estado
         return $this->seleccion;
     }
     
-     public function __toString(){
-        return $this->estado;
-    }
+     public function __toString() {
+        return $this->descripcion;
+ }
 }

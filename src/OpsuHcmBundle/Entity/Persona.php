@@ -157,6 +157,16 @@ class Persona
     private $updatedAt;
 
     /**
+     * @var \Parentesco
+     *
+     * @ORM\ManyToOne(targetEntity="Parentesco")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idparentesco", referencedColumnName="id")
+     * })
+     */
+    private $idparentesco;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -530,5 +540,51 @@ class Persona
     public function getCarnetFile()
     {
         return $this->carnetFile;
+    }
+
+     /**
+     * Set idparentesco
+     *
+     * @param \OpsuHcmBundle\Entity\Parentesco $idparentesco
+     * @return Afiliado
+     */
+    public function setIdparentesco(\OpsuHcmBundle\Entity\Parentesco $idparentesco = null)
+    {
+        $this->idparentesco = $idparentesco;
+
+        return $this;
+    }
+
+    /**
+     * Get idparentesco
+     *
+     * @return \OpsuHcmBundle\Entity\Parentesco 
+     */
+    public function getIdparentesco()
+    {
+        return $this->idparentesco;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Persona
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
 }

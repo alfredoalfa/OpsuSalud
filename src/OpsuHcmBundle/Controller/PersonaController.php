@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use OpsuHcmBundle\Entity\PersonaUser;
+use OpsuHcmBundle\Entity\Afiliado;
+use OpsuHcmBundle\Entity\Parentesco;
 use AppBundle\Entity\User;
 
 /**
@@ -163,13 +165,20 @@ class PersonaController extends Controller
              if ($roles[0]=="ROLE_TEMPORAL") {
             
                     $personaUser = new PersonaUser();
-                    $User = new User();
+                    $afiliado= new Afiliado();
+                    $User= new User();
+                    $parentesco= new Parentesco();
 
                     $idPersona = $this->getDoctrine()->getRepository('OpsuHcmBundle:Persona')->find($persona->getId());
                     $idUser = $this->getDoctrine()->getRepository('AppBundle:User')->find($user->getId());
+                    $titular=$this->getDoctrine()->getRepository('OpsuHcmBundle:Parentesco')->findAll();
 
                     $personaUser->setIdpersona($idPersona);
                     $personaUser->setIdUsuario($idUser);
+
+                    $persona = $em->getRepository('OpsuHcmBundle:Persona')->find($idPersona);
+                    $persona->setIdparentesco($titular[4]);
+                    $em->persist($persona);
                     $em->persist($personaUser); 
                     $em->flush();
 
@@ -183,5 +192,15 @@ class PersonaController extends Controller
             'persona' => $persona,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/registroAfiliado", name="registroAfiliado")
+     * @Method({"GET", "POST"})
+     */
+    public function registroAfiliadoAction(Request $request)
+    {
+
+        
     }
 }

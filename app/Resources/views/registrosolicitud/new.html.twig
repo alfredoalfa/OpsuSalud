@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+{{ dump(app.user.id) }}
     <h1>Registrosolicitud creation</h1>
 
     {{ form_start(form) }}
@@ -13,4 +14,32 @@
             <a href="{{ path('registrosolicitud_index') }}">Back to the list</a>
         </li>
     </ul>
+{% endblock %}
+{% block javascripts %}
+{{ parent() }}
+<script type ="text/javascript" src="{{ asset('bundles/opsusalud/js/paciente.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    alert("ola");
+
+    var brand = {{ app.user.id }}
+    alert(brand);
+             $.ajax({
+                url: '../paciente',
+                type: 'POST',
+                dataType: 'json',
+                data: {idPaciente: brand}, //esto es un 2 el numero del estado que regresa cuando lo seleccionas
+                success: function(data) {
+                   alert(JSON.stringify(data));
+                        var pro= data[0].municipio;
+                     alert(pro);
+                     alert(data);
+                    ajaxMunicipio(data);
+                }
+            });
+     return false;
+
+});
+
+</script>
 {% endblock %}

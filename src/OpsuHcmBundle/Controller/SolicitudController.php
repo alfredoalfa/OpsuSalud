@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use OpsuHcmBundle\Entity\Persona;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 /**
  * Solicitud controller.
@@ -40,20 +42,44 @@ class SolicitudController extends Controller
      */
     public function newAction(Request $request)
     {
+        $user = $this->getUser();
+        $userId = $user->getId();
+
         $solicitud = new Solicitud();
+        $em = $this->getDoctrine()->getManager();
+
+         $idPersona = $em->getRepository('OpsuHcmBundle:PersonaUser')->findBy(array('idusuario'=>$userId));
+        //print_r(dump($userId));
+        //print_r(dump($idPersona)); 
+        //print_r(dump($idPersona[0]->getIdpersona()->getId()));
+
+        $personas = $em->getRepository('OpsuHcmBundle:Persona')->findBy(array('id'=>$idPersona[0]->getIdpersona()->getId()));
+        $datosPersona=$idPersona[0]->getIdpersona();
+        $titular=$datosPersona->getPrimerApellido().' '.$datosPersona->getPrimerNombre().' '.$datosPersona->getCedula();
+ 
         $form = $this->createForm('OpsuHcmBundle\Form\SolicitudType', $solicitud);
         $form->handleRequest($request);
 
+        // $form ->add('idtitular', EntityType::class, array(
+        //                 'class' => 'OpsuHcmBundle:Persona',
+        //                 'choices'  => array($personas[0]),
+        //                     'label'=>'Titular',
+        //                     ));
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($solicitud);
+
+            $solicitud->setIdtitular($personas[0]);
+            $solicitud->setCompletado(false);
+            $solicitud->setFechaSolicitud(new \DateTime('now'));
+            $em->persist($solicitud);  
             $em->flush();
 
-            return $this->redirectToRoute('solicitud_show', array('id' => $solicitud->getId()));
+            return $this->redirectToRoute('registrosolicitud_new', array('id' => $solicitud->getId()));
         }
 
         return $this->render('solicitud/new.html.twig', array(
             'solicitud' => $solicitud,
+            'titular'=> $titular,
             'form' => $form->createView(),
         ));
     }
@@ -137,7 +163,7 @@ class SolicitudController extends Controller
 
     /**
      * @Route("/generarSolicitud/", name="generarSolicitud")
-     * @Method("POST")
+     * @Method({"GET", "POST"})
      */
     public function generarSolicitudAction(Request $request)
     {

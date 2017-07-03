@@ -33,32 +33,15 @@ class DefaultController extends Controller
                 break;
             default:
 
-            
-            $solicitud = new Solicitud();
-
+        $solicitud = new Solicitud();
         $em = $this->getDoctrine()->getManager();
         
         $idPersona = $em->getRepository('OpsuHcmBundle:PersonaUser')->findBy(array('idusuario'=>$userId));
-        print_r(dump($userId));
-        print_r(dump($idPersona)); 
-            print_r(dump($idPersona[0]->getIdpersona()->getId()));
-
         $personas = $em->getRepository('OpsuHcmBundle:Persona')->findBy(array('id'=>$idPersona[0]->getIdpersona()->getId()));
-             
-             $form = $this->createForm('OpsuHcmBundle\Form\SolicitudType', $solicitud, array(
-            'action' => $this->generateUrl('generarSolicitud'),
-            'method' => 'POST',
-        ));
-             $form ->add('idtitular', EntityType::class, array(
-                        'class' => 'OpsuHcmBundle:Persona',
-                        'choices'  => array($personas[0]),
-                            'label'=>'Titular',
-                            ));
-          
-               return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
-                    'solicitud' => $solicitud,
-                    'form'   => $form->createView()));
-                break;   
+         
+        return $this->render('OpsuHcmBundle:Default:index.html.twig', array(
+             'solicitud' => $solicitud));
+        break;   
                 }     
     }
 
@@ -88,5 +71,18 @@ class DefaultController extends Controller
         $parroquia =$em->getRepository('OpsuHcmBundle:Persona')->listaParroquias($idMunicipio);
 
         return new JsonResponse($parroquia);
+    }
+
+    /**
+     * @Route("/paciente", name="paciente")
+     */
+    public function pacienteAction(Request $request)
+    {
+        $idPaciente = $request->request->get('idPaciente');
+
+        $em = $this->getDoctrine()->getManager();
+        $pacientes =$em->getRepository('OpsuHcmBundle:Persona')->listaPacientes($idPaciente);
+
+        return new JsonResponse($idPaciente);
     }
 }

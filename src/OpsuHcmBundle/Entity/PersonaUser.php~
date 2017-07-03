@@ -90,14 +90,4 @@ class PersonaUser
         return $this->idusuario;
     }
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }
