@@ -63,7 +63,7 @@ class Nacionalidad
     {
         return $this->nacionalidad;
     }
-      public function __toString(){
+          public function __toString(){
         return $this->nacionalidad;
     }
 }

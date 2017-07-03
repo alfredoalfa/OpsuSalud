@@ -9,11 +9,12 @@ use Symfony\Component\Validator\ExecutionContext;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
+
 /**
  * Persona
  * @Vich\Uploadable
  *
- * @ORM\Table(name="persona", indexes={@ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
+ * @ORM\Table(name="persona", indexes={@ORM\Index(name="idx_51e5b69b53b72d2c", columns={"idparentesco"}), @ORM\Index(name="IDX_51E5B69BD5B220CA", columns={"idnacionalidad"}), @ORM\Index(name="IDX_51E5B69B5DBCBF9D", columns={"idparroquia"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Persona")
  * @DoctrineAssert\UniqueEntity(fields = {"cedula"})
  */
@@ -29,7 +30,7 @@ class Persona
      */
     private $id;
 
-    /**
+     /**
      * @var string
      *
      * @ORM\Column(name="primer_apellido", type="string", length=50, nullable=false)

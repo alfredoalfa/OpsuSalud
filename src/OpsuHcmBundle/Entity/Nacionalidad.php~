@@ -30,40 +30,4 @@ class Nacionalidad
     private $nacionalidad;
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set nacionalidad
-     *
-     * @param string $nacionalidad
-     * @return Nacionalidad
-     */
-    public function setNacionalidad($nacionalidad)
-    {
-        $this->nacionalidad = $nacionalidad;
-
-        return $this;
-    }
-
-    /**
-     * Get nacionalidad
-     *
-     * @return string 
-     */
-    public function getNacionalidad()
-    {
-        return $this->nacionalidad;
-    }
-      public function __toString(){
-        return $this->nacionalidad;
-    }
 }

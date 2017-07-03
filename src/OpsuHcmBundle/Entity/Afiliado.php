@@ -7,7 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Afiliado
  *
- * @ORM\Table(name="afiliado")
+ * @ORM\Table(name="afiliado", indexes={@ORM\Index(name="IDX_319B09B99B4E41B4", columns={"idafiliado"}), @ORM\Index(name="IDX_319B09B9A62749A9", columns={"idtitular"})})
+ * @ORM\Entity
  */
 class Afiliado
 {
@@ -79,7 +80,7 @@ class Afiliado
     /**
      * Set idtitular
      *
-     * @param \OpsuHcmBundle\Entity\Person $idtitular
+     * @param \OpsuHcmBundle\Entity\Persona $idtitular
      * @return Afiliado
      */
     public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)

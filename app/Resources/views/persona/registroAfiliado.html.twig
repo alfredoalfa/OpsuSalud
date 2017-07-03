@@ -3,13 +3,13 @@
 {% block content -%}
 <div class="col-md-12">
 
-    <h3 style="color:#3371B5">Registro Datos Personales</h3>
-    <h4>Por favor llene los campos solicitados a continuacion</h4>
+    <h3 style="color:#3371B5">Registro de Afiliados</h3>
+    <h4>Por favor llene los campos con los datos de sus afiliados</h4>
 
  <div class="col-md-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Registro Usuarios</h3>
+           <h3 class="panel-title">Títular {{titular}}</h3>
         </div>
 
         <div class="panel-body"><!--contenido panel>-->
@@ -22,6 +22,7 @@
         {{ form_row(form.segundoNombre) }}
         {{ form_row(form.genero) }}
         {{ form_row(form.idEstado) }}
+        {{ form_row(form.idparentesco) }}
         
         
     </div>
@@ -46,7 +47,7 @@
     </div>
     </div>
      <div class="col-md-3">
-               {{ form_row(form.cedulaFile) }}
+        {{ form_row(form.cedulaFile) }}
         {{ form_row(form.carnetFile) }}
     </div>
 
@@ -73,4 +74,32 @@
             });
         });
         </script>
+        <script type="text/javascript">
+$(document).ready(function() {
+    alert("ola");
+
+    var titular =  5;
+    alert(titular);
+             $.ajax({
+                url: '../../listaParentesco',
+                type: 'POST',
+                dataType: 'json',
+                data: {idTitular: titular}, //esto es un 2 el numero del estado que regresa cuando lo seleccionas
+                success: function(data) {
+                   alert(JSON.stringify(data));
+                   var pro= data[0].parentesco;
+                   //alert(pro);
+                   //alert(data);
+                   var $parentesco_selector = $('#opsuhcmbundle_persona_idparentesco');
+                   $parentesco_selector.html('<option>Seleccione...</option>');
+
+             for (var i=0, total = data.length; i < total; i++) {
+                $parentesco_selector.append('<option value="' + data[i].id + '">' + data[i].parentesco + '</option>');
+                 }
+                }
+            });
+     return false;
+});
+
+</script>
 {% endblock %}

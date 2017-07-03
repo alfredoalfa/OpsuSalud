@@ -30,40 +30,4 @@ class Patologia
     private $patologia;
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set patologia
-     *
-     * @param string $patologia
-     * @return Patologia
-     */
-    public function setPatologia($patologia)
-    {
-        $this->patologia = $patologia;
-
-        return $this;
-    }
-
-    /**
-     * Get patologia
-     *
-     * @return string 
-     */
-    public function getPatologia()
-    {
-        return $this->patologia;
-    }
-             public function __toString(){
-        return $this->patologia;
-    }
 }

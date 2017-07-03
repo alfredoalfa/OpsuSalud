@@ -7,29 +7,41 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ReembolsoSolicitud
  *
- * @ORM\Table(name="reembolso_solicitud")
- * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\ReembolsoSolicitudRepository")
+ * @ORM\Table(name="reembolso_solicitud", indexes={@ORM\Index(name="idx_6e879b1a37f801f0", columns={"idcentromedico"}), @ORM\Index(name="idx_6e879b1a5d8b930d", columns={"idregistrosolicitud"})})
+ * @ORM\Entity
  */
 class ReembolsoSolicitud
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="reembolso_solicitud_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
     /**
-     * @var \RegistroSolicitud
+     * @var string
      *
-     * @ORM\ManyToOne(targetEntity="RegistroSolicitud")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idregistrosolicitud", referencedColumnName="id")
-     * })
+     * @ORM\Column(name="monto_solicitado", type="decimal", precision=10, scale=2, nullable=false)
      */
-    private $idregistroSolicitud;
+    private $montoSolicitado;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="presupuesto_recibo_ruta", type="text", nullable=true)
+     */
+    private $presupuestoReciboRuta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="monto_aprobado", type="decimal", precision=10, scale=2, nullable=false)
+     */
+    private $montoAprobado;
 
     /**
      * @var \CentroMedico
@@ -39,25 +51,18 @@ class ReembolsoSolicitud
      *   @ORM\JoinColumn(name="idcentromedico", referencedColumnName="id")
      * })
      */
-    private $idcentroMedico;
-
+    private $idcentromedico;
 
     /**
-     * @ORM\Column(type="decimal", scale=2)
-     */
-    private $montoSolicitado;
-
-     /**
-     * @var string
+     * @var \RegistroSolicitud
      *
-     * @ORM\Column(name="presupuesto_recibo_ruta", type="text", nullable=true)
+     * @ORM\ManyToOne(targetEntity="RegistroSolicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idregistrosolicitud", referencedColumnName="id")
+     * })
      */
-    private $presupuestoReciboRuta;
+    private $idregistrosolicitud;
 
-    /**
-     * @ORM\Column(type="decimal", scale=2)
-     */
-    private $montoAprobado;
 
 
     /**
@@ -140,48 +145,48 @@ class ReembolsoSolicitud
     }
 
     /**
-     * Set idregistroSolicitud
+     * Set idcentromedico
      *
-     * @param \OpsuHcmBundle\Entity\RegistroSolicitud $idregistroSolicitud
+     * @param \OpsuHcmBundle\Entity\CentroMedico $idcentromedico
      * @return ReembolsoSolicitud
      */
-    public function setIdregistroSolicitud(\OpsuHcmBundle\Entity\RegistroSolicitud $idregistroSolicitud = null)
+    public function setIdcentromedico(\OpsuHcmBundle\Entity\CentroMedico $idcentromedico = null)
     {
-        $this->idregistroSolicitud = $idregistroSolicitud;
+        $this->idcentromedico = $idcentromedico;
 
         return $this;
     }
 
     /**
-     * Get idregistroSolicitud
-     *
-     * @return \OpsuHcmBundle\Entity\RegistroSolicitud 
-     */
-    public function getIdregistroSolicitud()
-    {
-        return $this->idregistroSolicitud;
-    }
-
-    /**
-     * Set idcentroMedico
-     *
-     * @param \OpsuHcmBundle\Entity\CentroMedico $idcentroMedico
-     * @return ReembolsoSolicitud
-     */
-    public function setIdcentroMedico(\OpsuHcmBundle\Entity\CentroMedico $idcentroMedico = null)
-    {
-        $this->idcentroMedico = $idcentroMedico;
-
-        return $this;
-    }
-
-    /**
-     * Get idcentroMedico
+     * Get idcentromedico
      *
      * @return \OpsuHcmBundle\Entity\CentroMedico 
      */
-    public function getIdcentroMedico()
+    public function getIdcentromedico()
     {
-        return $this->idcentroMedico;
+        return $this->idcentromedico;
+    }
+
+    /**
+     * Set idregistrosolicitud
+     *
+     * @param \OpsuHcmBundle\Entity\RegistroSolicitud $idregistrosolicitud
+     * @return ReembolsoSolicitud
+     */
+    public function setIdregistrosolicitud(\OpsuHcmBundle\Entity\RegistroSolicitud $idregistrosolicitud = null)
+    {
+        $this->idregistrosolicitud = $idregistrosolicitud;
+
+        return $this;
+    }
+
+    /**
+     * Get idregistrosolicitud
+     *
+     * @return \OpsuHcmBundle\Entity\RegistroSolicitud 
+     */
+    public function getIdregistrosolicitud()
+    {
+        return $this->idregistrosolicitud;
     }
 }

@@ -7,31 +7,22 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CasosAsignado
  *
- * @ORM\Table(name="casos_asignado")
+ * @ORM\Table(name="casos_asignado", indexes={@ORM\Index(name="idx_59573d39e8c9d535", columns={"idsolicitud"}), @ORM\Index(name="idx_59573d39f62ac5f6", columns={"idanalista"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\CasosAsignadoRepository")
  */
 class CasosAsignado
 {
     /**
-     * @var int
+     * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\SequenceGenerator(sequenceName="casos_asignado_id_seq", allocationSize=1, initialValue=1)
      */
     private $id;
 
-   /**
-     * @var \Solicitud
-     *
-     * @ORM\ManyToOne(targetEntity="Solicitud")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idsolicitud", referencedColumnName="id")
-     * })
-     */
-    private $idsolicitud;
-
-     /**
+    /**
      * @var \FosUser
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User",cascade={"persist"})
@@ -42,13 +33,25 @@ class CasosAsignado
     private $idanalista;
 
     /**
-     * @var bool
+     * @var boolean
      *
-     * @ORM\Column(name="completado", type="boolean")
+     * @ORM\Column(name="completado", type="boolean", nullable=false)
      */
     private $completado;
 
     /**
+     * @var \Solicitud
+     *
+     * @ORM\ManyToOne(targetEntity="Solicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idsolicitud", referencedColumnName="id")
+     * })
+     */
+    private $idsolicitud;
+
+
+
+   /**
      * Get id
      *
      * @return integer 

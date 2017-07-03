@@ -2,6 +2,7 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
   <entity name="Solicitud" table="solicitud">
     <indexes>
+      <index name="idx_96d27cc0174d74b2" columns="idtiposolicitud"/>
       <index name="IDX_96D27CC0A62749A9" columns="idtitular"/>
     </indexes>
     <id name="id" type="integer" column="id">
@@ -10,7 +11,12 @@
     <field name="fechaSolicitud" type="date" column="fecha_solicitud" nullable="true"/>
     <field name="observacion" type="text" column="observacion" nullable="true"/>
     <field name="completado" type="boolean" column="completado" nullable="true"/>
-    <many-to-one field="idtitular" target-entity="Titular">
+    <many-to-one field="idtiposolicitud" target-entity="Tiposolicitud">
+      <join-columns>
+        <join-column name="idtiposolicitud" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idtitular" target-entity="Persona">
       <join-columns>
         <join-column name="idtitular" referenced-column-name="id"/>
       </join-columns>

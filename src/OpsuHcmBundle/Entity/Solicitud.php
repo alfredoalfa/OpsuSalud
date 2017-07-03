@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Solicitud
  *
- * @ORM\Table(name="solicitud")
+ * @ORM\Table(name="solicitud", indexes={@ORM\Index(name="idx_96d27cc0174d74b2", columns={"idtiposolicitud"}), @ORM\Index(name="IDX_96D27CC0A62749A9", columns={"idtitular"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Solicitud")
  */
 class Solicitud
@@ -44,6 +44,16 @@ class Solicitud
     private $completado;
 
     /**
+     * @var \Tiposolicitud
+     *
+     * @ORM\ManyToOne(targetEntity="Tiposolicitud")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idtiposolicitud", referencedColumnName="id")
+     * })
+     */
+    private $idtiposolicitud;
+
+    /**
      * @var \Persona
      *
      * @ORM\ManyToOne(targetEntity="Persona")
@@ -53,15 +63,6 @@ class Solicitud
      */
     private $idtitular;
 
-    /**
-     * @var \Tiposolicitud
-     *
-     * @ORM\ManyToOne(targetEntity="Tiposolicitud")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtiposolicitud", referencedColumnName="id")
-     * })
-     */
-    private $idtiposolicitud;
 
 
     /**
@@ -144,29 +145,6 @@ class Solicitud
     }
 
     /**
-     * Set idtitular
-     *
-     * @param \OpsuHcmBundle\Entity\Titular $idtitular
-     * @return Solicitud
-     */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)
-    {
-        $this->idtitular = $idtitular;
-
-        return $this;
-    }
-
-    /**
-     * Get idtitular
-     *
-     * @return \OpsuHcmBundle\Entity\Titular 
-     */
-    public function getIdtitular()
-    {
-        return $this->idtitular;
-    }
-
-    /**
      * Set idtiposolicitud
      *
      * @param \OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud
@@ -187,5 +165,28 @@ class Solicitud
     public function getIdtiposolicitud()
     {
         return $this->idtiposolicitud;
-    }  
+    }
+
+    /**
+     * Set idtitular
+     *
+     * @param \OpsuHcmBundle\Entity\Persona $idtitular
+     * @return Solicitud
+     */
+    public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)
+    {
+        $this->idtitular = $idtitular;
+
+        return $this;
+    }
+
+    /**
+     * Get idtitular
+     *
+     * @return \OpsuHcmBundle\Entity\Persona 
+     */
+    public function getIdtitular()
+    {
+        return $this->idtitular;
+    }
 }

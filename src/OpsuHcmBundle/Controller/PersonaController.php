@@ -148,14 +148,18 @@ class PersonaController extends Controller
     public function crearPersonaAction(Request $request)
     {
         $persona = new Persona();
-        $form = $this->createForm($this->get('app.form.type.persona'), $persona);
-        //$form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);
+        $personaUser = new PersonaUser();
+        $afiliado= new Afiliado();
+        $User= new User();
+        $parentesco= new Parentesco();
 
+        $em = $this->getDoctrine()->getManager();
+        $form = $this->createForm($this->get('app.form.type.persona'), $persona);
+        //$form = $this->createForm('OpsuHcmBundle\Form\PersonaType', $persona);      
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $em = $this->getDoctrine()->getManager();
             $em->persist($persona);
             $em->flush();
 
@@ -164,11 +168,6 @@ class PersonaController extends Controller
     
              if ($roles[0]=="ROLE_TEMPORAL") {
             
-                    $personaUser = new PersonaUser();
-                    $afiliado= new Afiliado();
-                    $User= new User();
-                    $parentesco= new Parentesco();
-
                     $idPersona = $this->getDoctrine()->getRepository('OpsuHcmBundle:Persona')->find($persona->getId());
                     $idUser = $this->getDoctrine()->getRepository('AppBundle:User')->find($user->getId());
                     $titular=$this->getDoctrine()->getRepository('OpsuHcmBundle:Parentesco')->findAll();
@@ -195,12 +194,52 @@ class PersonaController extends Controller
     }
 
     /**
-     * @Route("/registroAfiliado", name="registroAfiliado")
+     * @Route("/afiliadoRegistro/", name="afiliadoRegistro")
      * @Method({"GET", "POST"})
      */
-    public function registroAfiliadoAction(Request $request)
+    public function afiliadoRegistroAction(Request $request)
     {
+        $persona = new Persona();
+        $personaUser = new PersonaUser();
+        $afiliado= new Afiliado();
+        $User= new User();
+        $parentesco= new Parentesco();
 
-        
+        $user = $this->getUser();
+        $userId = $user->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $idPersona = $em->getRepository('OpsuHcmBundle:PersonaUser')->findBy(array('idusuario'=>$userId));
+
+        $personas = $em->getRepository('OpsuHcmBundle:Persona')->findBy(array('id'=>$idPersona[0]->getIdpersona()->getId()));
+        $datosPersona=$idPersona[0]->getIdpersona();
+        $titular=$datosPersona->getPrimerApellido().' '.$datosPersona->getPrimerNombre().' '.$datosPersona->getCedula();
+
+        $titularPoliza= $em->getRepository('OpsuHcmBundle:Persona')->find($idPersona[0]->getIdpersona()->getId());
+
+        $form = $this->createForm($this->get('app.form.type.persona'), $persona);
+        $form->add('idparentesco');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $em->persist($persona);
+                         /////**relacionar el usuario activo con el afiliado que agrego**/////
+            $afiliado->setIdafiliado($persona);
+            $afiliado->setIdtitular($titularPoliza);
+
+            $em->persist($afiliado);
+            $em->flush();
+
+ 
+
+
+            return $this->redirectToRoute('persona_show', array('id' => $persona->getId()));
+        }
+         return $this->render('persona/registroAfiliado.html.twig', array(
+            'persona' => $persona,
+             'titular'=> $titular,
+            'form' => $form->createView(),
+        ));
     }
 }

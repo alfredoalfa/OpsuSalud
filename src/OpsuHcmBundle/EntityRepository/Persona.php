@@ -3,6 +3,7 @@
 namespace OpsuHcmBundle\EntityRepository;
 
 use Doctrine\ORM\EntityRepository;
+use OpsuHcmBundle\Entity\Parentesco;
 
 /**
  * Persona
@@ -43,6 +44,17 @@ class Persona extends EntityRepository
     public function listaPacientes($idUser)
     {
         
+    }
+
+    public function listaParentescos($idTitular)
+    {
+        $entities=$this->getEntityManager()->createQuery("
+            SELECT Parentesco
+            FROM OpsuHcmBundle:Parentesco Parentesco
+            WHERE Parentesco.id != :idTitular
+        ")->setParameter('idTitular', $idTitular);
+
+            return $entities->getArrayResult();
     }
 
 }

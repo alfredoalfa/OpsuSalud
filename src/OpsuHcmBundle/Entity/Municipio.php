@@ -96,7 +96,7 @@ class Municipio
     {
         return $this->estado;
     }
-    public function __toString(){
+        public function __toString(){
         return $this->descripcion;
     }
 }

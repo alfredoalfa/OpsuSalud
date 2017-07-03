@@ -63,8 +63,7 @@ class Tiposolicitud
     {
         return $this->tiposolicitud;
     }
-
-         public function __toString(){
+      public function __toString(){
         return $this->tiposolicitud;
     }
 }

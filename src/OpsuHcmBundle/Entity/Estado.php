@@ -93,8 +93,7 @@ class Estado
     {
         return $this->seleccion;
     }
-    
-     public function __toString() {
+         public function __toString() {
         return $this->descripcion;
  }
 }

@@ -98,6 +98,7 @@ class RegistroSolicitud
     private $idsolicitud;
 
 
+
     /**
      * Get id
      *

@@ -12,6 +12,7 @@ use OpsuHcmBundle\Entity\Municipio;
 use OpsuHcmBundle\Entity\Parroquia;
 use OpsuHcmBundle\Entity\Solicitud;
 use OpsuHcmBundle\Entity\Persona;
+use OpsuHcmBundle\Entity\Parentesco;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 
@@ -84,5 +85,17 @@ class DefaultController extends Controller
         $pacientes =$em->getRepository('OpsuHcmBundle:Persona')->listaPacientes($idPaciente);
 
         return new JsonResponse($idPaciente);
+    }
+
+    /**
+     * @Route("/listaParentesco", name="listaParentesco")
+     */
+    public function listaParentescoAction(Request $request)
+    {
+        $idTitular = $request->request->get('idTitular');
+        $em = $this->getDoctrine()->getManager();
+        $listaParentesco =$em->getRepository('OpsuHcmBundle:Persona')->listaParentescos($idTitular);
+
+         return new JsonResponse($listaParentesco);
     }
 }

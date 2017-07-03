@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="ReembolsoSolicitud" table="reembolso_solicitud">
+    <indexes>
+      <index name="idx_6e879b1a37f801f0" columns="idcentromedico"/>
+      <index name="idx_6e879b1a5d8b930d" columns="idregistrosolicitud"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+    </id>
+    <field name="montoSolicitado" type="decimal" column="monto_solicitado" precision="10" scale="2" nullable="false"/>
+    <field name="presupuestoReciboRuta" type="text" column="presupuesto_recibo_ruta" nullable="true"/>
+    <field name="montoAprobado" type="decimal" column="monto_aprobado" precision="10" scale="2" nullable="false"/>
+    <many-to-one field="idcentromedico" target-entity="CentroMedico">
+      <join-columns>
+        <join-column name="idcentromedico" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="idregistrosolicitud" target-entity="RegistroSolicitud">
+      <join-columns>
+        <join-column name="idregistrosolicitud" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

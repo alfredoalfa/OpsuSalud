@@ -10,12 +10,9 @@
     <id name="id" type="integer" column="id">
       <generator strategy="SEQUENCE"/>
     </id>
-    <field name="centroMedico" type="string" column="centro_medico" length="255" nullable="true"/>
     <field name="tratamiento" type="text" column="tratamiento" nullable="true"/>
-    <field name="montoSolicitado" type="decimal" column="monto_solicitado" precision="10" scale="0" nullable="true"/>
     <field name="observacion" type="text" column="observacion" nullable="true"/>
     <field name="informeMedicoRuta" type="text" column="informe_medico_ruta" nullable="true"/>
-    <field name="presupuestoRuta" type="string" column="presupuesto_ruta" length="255" nullable="false"/>
     <field name="fechaAprobado" type="date" column="fecha_aprobado" nullable="true"/>
     <field name="completado" type="boolean" column="completado" nullable="true"/>
     <many-to-one field="idestatus" target-entity="Estatus">
@@ -36,16 +33,6 @@
     <many-to-one field="idsolicitud" target-entity="Solicitud">
       <join-columns>
         <join-column name="idsolicitud" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idtiposolicitud" target-entity="Tiposolicitud">
-      <join-columns>
-        <join-column name="idtiposolicitud" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
-    <many-to-one field="idtitular" target-entity="Titular">
-      <join-columns>
-        <join-column name="idtitular" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
   </entity>

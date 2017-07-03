@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * SaimeCedulas
  *
  * @ORM\Table(name="saime_cedulas")
- * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\SaimeCedulasRepository")
+ * @ORM\Entity
  */
 class SaimeCedulas
 {
@@ -133,6 +133,8 @@ class SaimeCedulas
      * @ORM\Column(name="fecha_creacion", type="datetime", nullable=false)
      */
     private $fechaCreacion;
+
+
 
     /**
      * Get id

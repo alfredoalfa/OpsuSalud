@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="SaimeCedulas" table="saime_cedulas">
+    <id name="id" type="integer" column="id">
+      <generator strategy="SEQUENCE"/>
+    </id>
+    <field name="letra" type="string" column="letra" length="255" nullable="true"/>
+    <field name="numcedula" type="integer" column="numcedula" nullable="true"/>
+    <field name="paisorigen" type="string" column="paisorigen" length="1" nullable="true"/>
+    <field name="nacionalidad" type="string" column="nacionalidad" length="255" nullable="true"/>
+    <field name="primernombre" type="string" column="primernombre" length="255" nullable="true"/>
+    <field name="segundonombre" type="string" column="segundonombre" length="255" nullable="true"/>
+    <field name="primerapellido" type="string" column="primerapellido" length="255" nullable="true"/>
+    <field name="segundoapellido" type="string" column="segundoapellido" length="255" nullable="true"/>
+    <field name="fechanac" type="string" column="fechanac" length="255" nullable="true"/>
+    <field name="fechacedorg" type="string" column="fechacedorg" length="1" nullable="true"/>
+    <field name="codobjecion" type="string" column="codobjecion" length="1" nullable="true"/>
+    <field name="codoficina" type="string" column="codoficina" length="1" nullable="true"/>
+    <field name="codestadocivil" type="string" column="codestadocivil" length="255" nullable="true"/>
+    <field name="naturalizado" type="string" column="naturalizado" length="255" nullable="true"/>
+    <field name="sexo" type="string" column="sexo" length="255" nullable="true"/>
+    <field name="fechaCreacion" type="datetime" column="fecha_creacion" nullable="false"/>
+  </entity>
+</doctrine-mapping>

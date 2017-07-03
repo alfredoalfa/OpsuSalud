@@ -64,7 +64,7 @@ class Parentesco
         return $this->parentesco;
     }
 
-    public function __toString(){
+        public function __toString(){
         return $this->parentesco;
     }
 }

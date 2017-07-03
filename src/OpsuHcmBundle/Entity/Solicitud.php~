@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Solicitud
  *
- * @ORM\Table(name="solicitud")
- * @ORM\Entity(repositoryClass="OpsuHcmBundle\EntityRepository\Solicitud")
+ * @ORM\Table(name="solicitud", indexes={@ORM\Index(name="idx_96d27cc0174d74b2", columns={"idtiposolicitud"}), @ORM\Index(name="IDX_96D27CC0A62749A9", columns={"idtitular"})})
+ * @ORM\Entity
  */
 class Solicitud
 {
@@ -44,16 +44,6 @@ class Solicitud
     private $completado;
 
     /**
-     * @var \Persona
-     *
-     * @ORM\ManyToOne(targetEntity="Persona")
-     * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="idtitular", referencedColumnName="id")
-     * })
-     */
-    private $idtitular;
-
-    /**
      * @var \Tiposolicitud
      *
      * @ORM\ManyToOne(targetEntity="Tiposolicitud")
@@ -63,129 +53,15 @@ class Solicitud
      */
     private $idtiposolicitud;
 
-
     /**
-     * Get id
+     * @var \Persona
      *
-     * @return integer 
+     * @ORM\ManyToOne(targetEntity="Persona")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="idtitular", referencedColumnName="id")
+     * })
      */
-    public function getId()
-    {
-        return $this->id;
-    }
+    private $idtitular;
 
-    /**
-     * Set fechaSolicitud
-     *
-     * @param \DateTime $fechaSolicitud
-     * @return Solicitud
-     */
-    public function setFechaSolicitud($fechaSolicitud)
-    {
-        $this->fechaSolicitud = $fechaSolicitud;
 
-        return $this;
-    }
-
-    /**
-     * Get fechaSolicitud
-     *
-     * @return \DateTime 
-     */
-    public function getFechaSolicitud()
-    {
-        return $this->fechaSolicitud;
-    }
-
-    /**
-     * Set observacion
-     *
-     * @param string $observacion
-     * @return Solicitud
-     */
-    public function setObservacion($observacion)
-    {
-        $this->observacion = $observacion;
-
-        return $this;
-    }
-
-    /**
-     * Get observacion
-     *
-     * @return string 
-     */
-    public function getObservacion()
-    {
-        return $this->observacion;
-    }
-
-    /**
-     * Set completado
-     *
-     * @param boolean $completado
-     * @return Solicitud
-     */
-    public function setCompletado($completado)
-    {
-        $this->completado = $completado;
-
-        return $this;
-    }
-
-    /**
-     * Get completado
-     *
-     * @return boolean 
-     */
-    public function getCompletado()
-    {
-        return $this->completado;
-    }
-
-    /**
-     * Set idtitular
-     *
-     * @param \OpsuHcmBundle\Entity\Titular $idtitular
-     * @return Solicitud
-     */
-    public function setIdtitular(\OpsuHcmBundle\Entity\Persona $idtitular = null)
-    {
-        $this->idtitular = $idtitular;
-
-        return $this;
-    }
-
-    /**
-     * Get idtitular
-     *
-     * @return \OpsuHcmBundle\Entity\Titular 
-     */
-    public function getIdtitular()
-    {
-        return $this->idtitular;
-    }
-
-    /**
-     * Set idtiposolicitud
-     *
-     * @param \OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud
-     * @return Solicitud
-     */
-    public function setIdtiposolicitud(\OpsuHcmBundle\Entity\Tiposolicitud $idtiposolicitud = null)
-    {
-        $this->idtiposolicitud = $idtiposolicitud;
-
-        return $this;
-    }
-
-    /**
-     * Get idtiposolicitud
-     *
-     * @return \OpsuHcmBundle\Entity\Tiposolicitud 
-     */
-    public function getIdtiposolicitud()
-    {
-        return $this->idtiposolicitud;
-    }  
 }

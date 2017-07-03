@@ -30,41 +30,4 @@ class Parentesco
     private $parentesco;
 
 
-
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set parentesco
-     *
-     * @param string $parentesco
-     * @return Parentesco
-     */
-    public function setParentesco($parentesco)
-    {
-        $this->parentesco = $parentesco;
-
-        return $this;
-    }
-
-    /**
-     * Get parentesco
-     *
-     * @return string 
-     */
-    public function getParentesco()
-    {
-        return $this->parentesco;
-    }
-
-    public function __toString(){
-        return $this->parentesco;
-    }
 }

@@ -7,12 +7,12 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PersonaUser
  *
- * @ORM\Table(name="persona_user")
+ * @ORM\Table(name="persona_user", indexes={@ORM\Index(name="idx_42f0df4bfd61e233", columns={"idusuario"}), @ORM\Index(name="idx_42f0df4b8ee1e4f5", columns={"idpersona"})})
  * @ORM\Entity(repositoryClass="OpsuHcmBundle\Repository\PersonaUserRepository")
  */
 class PersonaUser
 {
-   /**
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
